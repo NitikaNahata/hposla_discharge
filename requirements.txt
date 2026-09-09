@@ -1,0 +1,36 @@
+# Discharge Planning & Follow-up Copilot — pinned dependencies
+# Python 3.12+ · pip only · no Docker, no external database service.
+
+# --- Agent framework (AC-01..AC-05) ---
+langgraph>=1.2,<2
+langgraph-checkpoint-sqlite>=3.1,<4
+langchain>=1.0,<2
+langchain-core>=1.0,<2
+
+# --- LLM provider: Google Gemini (the only approved provider) ---
+langchain-google-genai>=4.0,<5
+
+# --- MCP & interoperability (AC-09, AC-10) ---
+# PINNED to mcp 1.x deliberately. mcp 2.x renames FastMCP -> MCPServer and moves
+# mcp.shared.context.RequestContext, which breaks langchain-mcp-adapters 0.3.x at
+# import time. The rubric mandates adapter-based integration, so the adapter wins.
+mcp>=1.9,<2
+langchain-mcp-adapters>=0.3,<1
+
+# --- Memory (AC-06..AC-08) ---
+langmem>=0.0.30
+chromadb>=1.5,<2
+sentence-transformers>=6.0,<7
+
+# --- Interface (NFR-02) ---
+typer>=0.15
+rich>=13.9
+streamlit>=1.40
+
+# --- Support ---
+pydantic>=2.9,<3
+python-dotenv>=1.0
+tenacity>=9.0
+
+# --- Tests / evidence (AC-07 traceability) ---
+pytest>=8.3
