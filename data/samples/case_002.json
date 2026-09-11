@@ -1,0 +1,55 @@
+{
+  "case_id": "CASE-002",
+  "session_id": "session-1",
+  "_comment": "SYNTHETIC DATA. Generated for this capstone. No real patient data or PHI. HIGH readmission risk: exercises route_risk_tier -> enhanced_followup (AC-03). Elderly, lives alone, prior admissions, polypharmacy, heart failure.",
+  "patient": {
+    "mrn": "MRN-2001",
+    "name": "Eleanor Prasad",
+    "age": 79,
+    "sex": "F",
+    "admission_date": "2026-08-20",
+    "discharge_date": "2026-08-26",
+    "primary_diagnosis": "Acute decompensated heart failure with reduced ejection fraction",
+    "secondary_diagnoses": [
+      "Chronic kidney disease stage 3a",
+      "Type 2 diabetes mellitus",
+      "Atrial fibrillation"
+    ],
+    "problem_list": [
+      "Heart failure with reduced ejection fraction (EF 32 percent)",
+      "Chronic kidney disease stage 3a",
+      "Type 2 diabetes mellitus",
+      "Atrial fibrillation",
+      "Osteoarthritis of both knees"
+    ],
+    "pre_admission_medications": [
+      { "name": "Furosemide", "dose": "20 mg", "frequency": "once daily", "route": "oral", "indication": "heart failure" },
+      { "name": "Metoprolol succinate", "dose": "25 mg", "frequency": "once daily", "route": "oral", "indication": "heart failure, atrial fibrillation" },
+      { "name": "Apixaban", "dose": "5 mg", "frequency": "twice daily", "route": "oral", "indication": "atrial fibrillation stroke prevention" },
+      { "name": "Metformin", "dose": "1000 mg", "frequency": "twice daily", "route": "oral", "indication": "type 2 diabetes" },
+      { "name": "Ibuprofen", "dose": "400 mg", "frequency": "as needed", "route": "oral", "indication": "knee pain" }
+    ],
+    "discharge_medications": [
+      { "name": "Furosemide", "dose": "40 mg", "frequency": "once daily", "route": "oral", "indication": "heart failure" },
+      { "name": "Metoprolol succinate", "dose": "25 mg", "frequency": "once daily", "route": "oral", "indication": "heart failure, atrial fibrillation" },
+      { "name": "Apixaban", "dose": "5 mg", "frequency": "twice daily", "route": "oral", "indication": "atrial fibrillation stroke prevention" },
+      { "name": "Metformin", "dose": "500 mg", "frequency": "twice daily", "route": "oral", "indication": "type 2 diabetes" },
+      { "name": "Sacubitril-valsartan", "dose": "24/26 mg", "frequency": "twice daily", "route": "oral", "indication": "heart failure with reduced ejection fraction" },
+      { "name": "Acetaminophen", "dose": "650 mg", "frequency": "as needed", "route": "oral", "indication": "knee pain" }
+    ],
+    "allergies": ["Penicillin"],
+    "prior_admissions_12mo": 2,
+    "lives_alone": true,
+    "mobility_limited": true,
+    "primary_language": "English",
+    "caregiver": ""
+  },
+  "clinical_notes": [
+    "79-year-old woman with known heart failure with reduced ejection fraction admitted with three days of increasing dyspnoea, orthopnoea and a 4 kg weight gain. Examination showed elevated jugular venous pressure, bibasilar crackles and bilateral pitting oedema to the mid-shin. NT-proBNP markedly elevated. Diuresed with intravenous furosemide with a net negative fluid balance of 4.2 litres over five days. Symptoms resolved. Discharge weight 71.4 kg, which is her documented dry weight.",
+    "Ibuprofen was identified during reconciliation as a contributor to decompensation and to declining renal function; it has been stopped and replaced with acetaminophen. Metformin dose reduced in the context of an eGFR of 44. Sacubitril-valsartan initiated at low dose on day four and tolerated; blood pressure remained above 105 systolic. Creatinine at discharge 1.4 mg/dL, stable over the final 48 hours. Basic metabolic panel required within 7 days given the diuretic increase and new sacubitril-valsartan.",
+    "This is the patient's third heart failure admission in twelve months. She lives alone in a first-floor flat. Her daughter lives approximately two hours away and is not able to provide daily support. Physiotherapy assessed her as needing a rolling walker for safe ambulation."
+  ],
+  "nurse_handoff_notes": [
+    "Patient requires a rolling walker for ambulation and became short of breath after walking approximately 15 metres on the day before discharge. She reports she has previously missed cardiology appointments because she has no transport and does not drive. She was unable to correctly state her diuretic dose during teach-back and needed the instructions repeated three times. Daily weight monitoring was demonstrated but she does not currently own a set of scales. No one at home to assist with medications."
+  ]
+}

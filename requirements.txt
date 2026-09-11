@@ -18,6 +18,10 @@ mcp>=1.9,<2
 langchain-mcp-adapters>=0.3,<1
 
 # --- Memory (AC-06..AC-08) ---
+# LangMem is in the approved stack and is installed for parity with it, but the memory
+# tiers deliberately sit on SQLite and Chroma directly. AC-07 is deterministically scored
+# and the proof has to survive a process boundary unambiguously, which means owning the
+# storage layer rather than delegating it. Rationale: docs/memory-design.md §1.
 langmem>=0.0.30
 chromadb>=1.5,<2
 sentence-transformers>=6.0,<7

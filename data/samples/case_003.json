@@ -1,0 +1,52 @@
+{
+  "case_id": "CASE-003",
+  "session_id": "session-1",
+  "_comment": "SYNTHETIC DATA. Generated for this capstone. No real patient data or PHI. Seeded with a CONTRAINDICATED interaction (warfarin + fluconazole) and a MAJOR one (warfarin + amiodarone) to exercise route_after_medication -> pharmacist_review (AC-03) and the interrupt/resume checkpoint path (AC-05). Also carries a deliberately unreconciled pre-admission medication to trigger the structural critic check (AC-12).",
+  "patient": {
+    "mrn": "MRN-3001",
+    "name": "Marcus Adeyemi",
+    "age": 68,
+    "sex": "M",
+    "admission_date": "2026-09-01",
+    "discharge_date": "2026-09-06",
+    "primary_diagnosis": "Deep vein thrombosis of the left lower extremity with pulmonary embolism",
+    "secondary_diagnoses": [
+      "Atrial fibrillation",
+      "Oropharyngeal candidiasis",
+      "Chronic obstructive pulmonary disease"
+    ],
+    "problem_list": [
+      "Deep vein thrombosis with pulmonary embolism",
+      "Atrial fibrillation",
+      "Chronic obstructive pulmonary disease",
+      "Oropharyngeal candidiasis"
+    ],
+    "pre_admission_medications": [
+      { "name": "Warfarin", "dose": "5 mg", "frequency": "once daily", "route": "oral", "indication": "atrial fibrillation" },
+      { "name": "Tiotropium", "dose": "18 mcg", "frequency": "once daily", "route": "inhaled", "indication": "COPD" },
+      { "name": "Atorvastatin", "dose": "40 mg", "frequency": "once daily", "route": "oral", "indication": "hyperlipidaemia" },
+      { "name": "Omeprazole", "dose": "20 mg", "frequency": "once daily", "route": "oral", "indication": "gastro-oesophageal reflux" }
+    ],
+    "discharge_medications": [
+      { "name": "Warfarin", "dose": "7.5 mg", "frequency": "once daily", "route": "oral", "indication": "DVT/PE and atrial fibrillation" },
+      { "name": "Amiodarone", "dose": "200 mg", "frequency": "once daily", "route": "oral", "indication": "atrial fibrillation rhythm control" },
+      { "name": "Fluconazole", "dose": "100 mg", "frequency": "once daily", "route": "oral", "indication": "oropharyngeal candidiasis, 7 day course" },
+      { "name": "Tiotropium", "dose": "18 mcg", "frequency": "once daily", "route": "inhaled", "indication": "COPD" },
+      { "name": "Atorvastatin", "dose": "40 mg", "frequency": "once daily", "route": "oral", "indication": "hyperlipidaemia" }
+    ],
+    "allergies": ["Sulfa drugs"],
+    "prior_admissions_12mo": 1,
+    "lives_alone": false,
+    "mobility_limited": false,
+    "primary_language": "English",
+    "caregiver": "Son, Daniel Adeyemi"
+  },
+  "clinical_notes": [
+    "68-year-old man admitted with left calf swelling and pleuritic chest pain. Doppler ultrasound confirmed an extensive left femoropopliteal deep vein thrombosis. CT pulmonary angiography demonstrated segmental pulmonary emboli bilaterally without right heart strain. Haemodynamically stable throughout. Anticoagulation continued with warfarin; INR on the day of discharge 2.4 and rising, with the dose increased to 7.5 mg daily.",
+    "During the admission the patient developed rapid atrial fibrillation with rates to 150. Amiodarone was initiated for rhythm control and the rate settled. He also developed oropharyngeal candidiasis following a course of inhaled steroids and was started on a seven-day course of fluconazole.",
+    "INR must be rechecked within 3 days of discharge. Both amiodarone and fluconazole substantially potentiate warfarin and the anticoagulation clinic has been asked to review the regimen urgently before the first post-discharge dose."
+  ],
+  "nurse_handoff_notes": [
+    "Son present at discharge teaching and will manage the medication schedule at home. Patient has a working relationship with the anticoagulation clinic and attends reliably. He reports that his omeprazole was stopped at some point during the admission but he is not sure why and would like this clarified before he goes home."
+  ]
+}
