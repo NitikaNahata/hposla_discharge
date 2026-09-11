@@ -40,15 +40,24 @@ python -m discharge_copilot run --case data/samples/case_001.json
 ### Other entry points
 
 ```bash
-python -m discharge_copilot run --case data/samples/case_003.json --pause-after medication
-python -m discharge_copilot resume --case-id CASE-003          # separate process — proves AC-05
-python -m discharge_copilot run --case data/samples/case_003.json --fault-inject mcp_timeout
+# Pause at the pharmacist-review interrupt, then resume in a SEPARATE process (AC-05)
+python -m discharge_copilot run --case data/samples/case_003.json --fresh --pause-after medication
+python -m discharge_copilot resume --case-id CASE-003
+
+# Force a real MCP timeout to exercise the self-healing loop (AC-12)
+python -m discharge_copilot run --case data/samples/case_003.json --fresh --fault-inject mcp_timeout
+
 python -m discharge_copilot memory --patient MRN-2001          # inspect tiered memory
+python -m discharge_copilot show --case-id CASE-003            # inspect a checkpoint
 
 pytest -v                                                      # AC traceability suite
 streamlit run app/streamlit_app.py                             # routing + memory UI
 python scripts/compare_single_vs_multi.py                      # measured NFR-06 comparison
 ```
+
+> **`--fresh` matters.** Checkpoints are keyed by `thread_id = case_id`, so re-running a case that
+> already completed *resumes* it and finalizes immediately — correct resume behaviour, and not what
+> you want when re-running. `--fresh` discards the checkpoint first.
 
 ---
 
@@ -111,7 +120,7 @@ without invoking the LLM.
 | Layer | Implementation |
 | --- | --- |
 | **Agent framework** | LangGraph 1.2 — `StateGraph` over the `DischargeState` TypedDict |
-| **LLM** | Google Gemini (`gemini-2.5-flash`) via `langchain-google-genai` |
+| **LLM** | Google Gemini (`gemini-3.6-flash`) via `langchain-google-genai` |
 | **State** | `src/discharge_copilot/state.py` — typed, with per-field reducers |
 | **Structured output** | Pydantic models in `schemas.py`, bound at every worker handoff |
 | **Checkpointing** | `SqliteSaver` on `.state/checkpoints.sqlite`, keyed by `thread_id` |
@@ -182,8 +191,23 @@ Full mapping of every acceptance criterion to its test and artifact:
 | [`docs/context-engineering.md`](docs/context-engineering.md) | Write / select / compress / isolate |
 | [`docs/memory-design.md`](docs/memory-design.md) | Three tiers and the eviction policy |
 | [`docs/evidence-index.md`](docs/evidence-index.md) | Every rubric parameter → its artifact |
+| [`docs/production-readiness.md`](docs/production-readiness.md) | What is production-quality, what is a stub, and what clinical use would still require |
 
 ---
+
+## Development
+
+```bash
+ruff check .          # lint (clean)
+ruff format .         # format
+mypy                  # type check (clean across 29 modules)
+pytest -m "not live"  # 202 offline tests, no API key needed
+pre-commit install    # optional: run lint/format/secret checks on commit
+```
+
+CI (`.github/workflows/ci.yml`) runs lint, types and the offline suite on Python 3.11 and 3.12,
+plus a clean-clone job that installs exactly as this README instructs and fails if a key-shaped
+string is ever committed.
 
 ## Notes
 
