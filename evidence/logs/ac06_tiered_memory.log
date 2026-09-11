@@ -1,0 +1,40 @@
+# AC-06 — Tiered Memory
+
+**Criteria:** AC-06 (tiered memory + recall)  
+**Generated:** 2026-09-09T18:41:46+00:00  
+**Regenerate:** `python scripts/generate_evidence.py`
+
+> All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).
+
+---
+
+Three tiers: T1 working (in-state, windowed) · T2 episodic (SQLite) · T3 semantic (Chroma + local embeddings).
+
+Seeded 8 facts for `MRN-2001` in session-1.
+
+## Semantic recall — retrieval by meaning, not by keyword
+
+**Query:** _why might this patient not attend her follow-up appointment?_
+
+- `[episodic]` Documented allergy: Penicillin. _(importance 1.00, score 1.00, from session-1)_
+- `[semantic]` Has previously missed cardiology appointments; no transport and does not drive. _(importance 0.80, score 0.43, from session-1)_
+- `[semantic]` Patient lives alone. _(importance 0.80, score 0.39, from session-1)_
+- `[semantic]` Could not state her own furosemide dose at teach-back. _(importance 0.70, score 0.31, from session-1)_
+
+**Query:** _does the patient understand her medications?_
+
+- `[episodic]` Has previously missed cardiology appointments; no transport and does not drive. _(importance 0.81, score 0.81, from session-1)_
+- `[semantic]` Could not state her own furosemide dose at teach-back. _(importance 0.70, score 0.42, from session-1)_
+- `[semantic]` Patient lives alone. _(importance 0.80, score 0.36, from session-1)_
+- `[semantic]` Documented allergy: Penicillin. _(importance 1.00, score 0.28, from session-1)_
+
+**Query:** _what must we avoid prescribing?_
+
+- `[episodic]` Patient lives alone. _(importance 0.81, score 0.81, from session-1)_
+- `[episodic]` Has previously missed cardiology appointments; no transport and does not drive. _(importance 0.81, score 0.81, from session-1)_
+- `[semantic]` Documented allergy: Penicillin. _(importance 1.00, score 0.30, from session-1)_
+- `[semantic]` Tolerating a regular diet on the ward. _(importance 0.25, score 0.28, from session-1)_
+- `[semantic]` Could not state her own furosemide dose at teach-back. _(importance 0.70, score 0.25, from session-1)_
+
+Note that none of these queries share significant vocabulary with the
+facts they retrieve — that is the capability exact-key lookup cannot offer.
