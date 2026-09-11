@@ -1,0 +1,54 @@
+{
+  "case_id": "CASE-001",
+  "session_id": "session-1",
+  "_comment": "SYNTHETIC DATA. Generated for this capstone. No real patient data or PHI. Baseline low-risk case: clean reconciliation, no serious interactions, routine follow-up.",
+  "patient": {
+    "mrn": "MRN-1001",
+    "name": "Aaron Whitfield",
+    "age": 54,
+    "sex": "M",
+    "admission_date": "2026-08-14",
+    "discharge_date": "2026-08-17",
+    "primary_diagnosis": "Community-acquired pneumonia, right lower lobe",
+    "secondary_diagnoses": ["Essential hypertension"],
+    "problem_list": ["Community-acquired pneumonia", "Essential hypertension"],
+    "pre_admission_medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "10 mg",
+        "frequency": "once daily",
+        "route": "oral",
+        "indication": "hypertension"
+      }
+    ],
+    "discharge_medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "10 mg",
+        "frequency": "once daily",
+        "route": "oral",
+        "indication": "hypertension"
+      },
+      {
+        "name": "Amoxicillin-clavulanate",
+        "dose": "875 mg",
+        "frequency": "twice daily",
+        "route": "oral",
+        "indication": "pneumonia, 5 days remaining"
+      }
+    ],
+    "allergies": [],
+    "prior_admissions_12mo": 0,
+    "lives_alone": false,
+    "mobility_limited": false,
+    "primary_language": "English",
+    "caregiver": "Spouse, Denise Whitfield"
+  },
+  "clinical_notes": [
+    "54-year-old male presented to the emergency department with a four-day history of productive cough, subjective fevers and right-sided pleuritic chest pain. On arrival temperature 38.6 C, heart rate 104, respiratory rate 22, oxygen saturation 92 percent on room air. Chest radiograph showed a right lower lobe consolidation. Treated with intravenous ceftriaxone and azithromycin, transitioned to oral amoxicillin-clavulanate on day two once afebrile. Oxygen saturation 96 percent on room air at rest and with ambulation prior to discharge. Tolerating a regular diet.",
+    "Blood cultures drawn on admission remain negative at 48 hours; final read pending at time of discharge. Follow-up chest radiograph recommended in six weeks to confirm radiographic resolution."
+  ],
+  "nurse_handoff_notes": [
+    "Patient ambulating independently in the hallway without desaturation. Spouse present for the majority of the admission and engaged in discharge teaching. Patient verbalised understanding of the antibiotic course and the importance of completing it. No transport needs identified; spouse is driving him home."
+  ]
+}

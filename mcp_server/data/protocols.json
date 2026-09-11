@@ -1,0 +1,174 @@
+{
+  "_comment": "SYNTHETIC discharge protocols served by the MCP resource discharge://protocol/{condition}. Generated for this capstone. Simplified for demonstration and NOT a clinical reference.",
+  "heart-failure": {
+    "title": "Discharge protocol — Acute decompensated heart failure",
+    "aliases": ["chf", "hf", "congestive heart failure", "acute decompensated heart failure"],
+    "required_before_discharge": [
+      "Patient at or near documented dry weight for at least 24 hours",
+      "Oral diuretic regimen established for a minimum of 24 hours before discharge",
+      "Basic metabolic panel within 24 hours of discharge, with potassium and creatinine stable",
+      "Guideline-directed medical therapy reviewed and uptitrated where blood pressure and renal function allow",
+      "Patient or caregiver able to demonstrate daily weight monitoring"
+    ],
+    "follow_up": {
+      "primary": "Cardiology or heart-failure clinic within 7 days of discharge",
+      "high_risk": "Within 3-5 days, plus a telephone check at 48-72 hours",
+      "labs": "Basic metabolic panel within 5-7 days of any diuretic or RAAS-agent change"
+    },
+    "education_priorities": [
+      "Weigh at the same time each morning and record it",
+      "Report a gain of more than 2 kg (about 4 lb) in 2 days or 2.5 kg in a week",
+      "Limit sodium to under 2 grams per day",
+      "Never stop a heart medication without speaking to the clinic first"
+    ],
+    "red_flags": [
+      "Weight gain of more than 2 kg in 2 days",
+      "Breathlessness at rest or needing extra pillows to sleep",
+      "New or worsening swelling of the ankles or abdomen",
+      "Light-headedness, fainting, or a heart rate under 50",
+      "Chest pain"
+    ],
+    "readmission_risk_note": "Heart failure carries one of the highest 30-day readmission rates. Early follow-up and reliable weight monitoring are the two interventions with the strongest effect."
+  },
+  "copd": {
+    "title": "Discharge protocol — COPD exacerbation",
+    "aliases": ["chronic obstructive pulmonary disease", "copd exacerbation", "emphysema"],
+    "required_before_discharge": [
+      "Stable on the intended home oxygen regimen for at least 24 hours",
+      "Inhaler technique observed and corrected",
+      "Course of steroids and antibiotics defined with an explicit end date",
+      "Smoking-cessation support offered where relevant"
+    ],
+    "follow_up": {
+      "primary": "Primary care or respiratory clinic within 7-14 days",
+      "high_risk": "Within 7 days, with pulmonary rehabilitation referral",
+      "labs": "None routinely required"
+    },
+    "education_priorities": [
+      "Use the rescue inhaler correctly and know when to escalate",
+      "Complete the full steroid and antibiotic course",
+      "Recognise an exacerbation early and start the action plan"
+    ],
+    "red_flags": [
+      "Breathlessness that does not improve with the rescue inhaler",
+      "Coughing up blood",
+      "Fever above 38.5 C",
+      "Confusion or unusual drowsiness",
+      "Blue tinge to the lips or fingertips"
+    ],
+    "readmission_risk_note": "Pulmonary rehabilitation referral within 30 days measurably reduces readmission."
+  },
+  "pneumonia": {
+    "title": "Discharge protocol — Community-acquired pneumonia",
+    "aliases": ["cap", "community-acquired pneumonia", "lower respiratory tract infection"],
+    "required_before_discharge": [
+      "Afebrile for at least 24 hours",
+      "Oxygen saturation at or above 92 percent on room air at rest and on ambulation",
+      "Tolerating oral intake and oral antibiotics",
+      "Antibiotic course defined with an explicit end date"
+    ],
+    "follow_up": {
+      "primary": "Primary care within 7-14 days",
+      "high_risk": "Within 7 days for patients over 65 or with comorbidity",
+      "labs": "Follow-up chest radiograph at 6 weeks to confirm radiographic resolution"
+    },
+    "education_priorities": [
+      "Complete the entire antibiotic course even once feeling well",
+      "Expect fatigue and cough to persist for several weeks",
+      "Return if symptoms worsen after initial improvement"
+    ],
+    "red_flags": [
+      "Fever returning after it had settled",
+      "Increasing breathlessness",
+      "Chest pain when breathing in",
+      "Coughing up blood",
+      "Confusion, especially in an older patient"
+    ],
+    "readmission_risk_note": "Confirm radiographic resolution at 6 weeks; a persistent opacity warrants further investigation."
+  },
+  "dvt-pe": {
+    "title": "Discharge protocol — Venous thromboembolism (DVT / PE)",
+    "aliases": ["dvt", "pe", "pulmonary embolism", "deep vein thrombosis", "venous thromboembolism"],
+    "required_before_discharge": [
+      "Anticoagulation regimen defined with an explicit intended duration",
+      "For warfarin: INR trending into range and a documented anticoagulation-clinic appointment",
+      "Bleeding-risk counselling completed and documented",
+      "Interacting medications reviewed against the anticoagulant"
+    ],
+    "follow_up": {
+      "primary": "Anticoagulation clinic within 3-7 days",
+      "high_risk": "INR within 3 days where an interacting medication has been started",
+      "labs": "INR per anticoagulation-clinic schedule; full blood count at 2 weeks"
+    },
+    "education_priorities": [
+      "Take the anticoagulant at the same time every day and never double a missed dose",
+      "Recognise bleeding that needs urgent attention",
+      "Tell every clinician and dentist about the anticoagulant",
+      "Keep vitamin K intake steady if taking warfarin"
+    ],
+    "red_flags": [
+      "Bleeding that will not stop, or blood in the urine or stool",
+      "A severe headache or any head injury",
+      "New leg swelling or pain",
+      "Sudden breathlessness or chest pain",
+      "Coughing up blood"
+    ],
+    "readmission_risk_note": "Warfarin interactions are the dominant cause of early readmission in this group. Any new interacting medication requires an INR check within 3 days."
+  },
+  "post-surgical": {
+    "title": "Discharge protocol — General post-surgical",
+    "aliases": ["surgery", "post-op", "postoperative", "post-operative"],
+    "required_before_discharge": [
+      "Pain controlled on oral analgesia",
+      "Tolerating diet and passing urine independently",
+      "Wound reviewed and care instructions given",
+      "Mobilising at or near baseline, or with an equipment plan in place"
+    ],
+    "follow_up": {
+      "primary": "Surgical clinic within 14 days",
+      "high_risk": "Wound review within 7 days where infection risk is elevated",
+      "labs": "As indicated by the procedure"
+    },
+    "education_priorities": [
+      "Keep the wound clean and dry; know what normal healing looks like",
+      "Follow the lifting and activity restrictions",
+      "Take analgesia proactively rather than waiting for severe pain"
+    ],
+    "red_flags": [
+      "Spreading redness, warmth or discharge from the wound",
+      "Fever above 38.5 C",
+      "Wound edges separating",
+      "Pain that suddenly worsens",
+      "Calf pain or swelling"
+    ],
+    "readmission_risk_note": "Surgical-site infection is the leading cause of readmission; early wound review matters most in the first week."
+  },
+  "diabetes": {
+    "title": "Discharge protocol — Diabetes-related admission",
+    "aliases": ["type 2 diabetes", "diabetes mellitus", "hyperglycaemia", "dka"],
+    "required_before_discharge": [
+      "Stable glucose on the intended home regimen for 24 hours",
+      "Insulin or oral agent technique demonstrated",
+      "Hypoglycaemia recognition and treatment taught",
+      "Glucose monitoring supplies confirmed available at home"
+    ],
+    "follow_up": {
+      "primary": "Primary care or endocrinology within 7-14 days",
+      "high_risk": "Within 7 days after any insulin regimen change",
+      "labs": "HbA1c if not measured within 3 months; renal function if agents were changed"
+    },
+    "education_priorities": [
+      "Check glucose as instructed and record the readings",
+      "Recognise and treat a low glucose promptly",
+      "Follow sick-day rules for medication adjustment"
+    ],
+    "red_flags": [
+      "Glucose readings persistently above 300 mg/dL",
+      "Vomiting and unable to keep fluids down",
+      "Fruity-smelling breath or rapid breathing",
+      "Confusion or difficulty waking",
+      "A low glucose that does not respond to sugar"
+    ],
+    "readmission_risk_note": "Reliable access to monitoring supplies and medication at home is the single strongest predictor of early readmission in this group."
+  }
+}

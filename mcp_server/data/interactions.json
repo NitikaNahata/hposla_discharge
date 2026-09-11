@@ -1,0 +1,90 @@
+{
+  "_comment": "SYNTHETIC drug-interaction reference backing the MCP medication_interaction_check tool. Generated for this capstone. Simplified for demonstration and NOT a clinical reference. Pair keys are lowercase, alphabetically ordered, joined by '|'.",
+  "pairs": {
+    "fluconazole|warfarin": {
+      "severity": "contraindicated",
+      "description": "Fluconazole strongly inhibits CYP2C9, the main enzyme clearing S-warfarin. INR can rise sharply within 2-3 days, with a substantial bleeding risk.",
+      "recommendation": "Avoid the combination where an alternative antifungal exists. If unavoidable, reduce the warfarin dose and recheck INR within 3 days with anticoagulation clinic oversight."
+    },
+    "amiodarone|warfarin": {
+      "severity": "major",
+      "description": "Amiodarone inhibits warfarin metabolism and its long half-life means the effect accumulates over weeks. INR typically rises with a delayed onset.",
+      "recommendation": "Anticipate a warfarin dose reduction of roughly one third. Recheck INR within 3-5 days and monitor weekly for the first month."
+    },
+    "furosemide|ibuprofen": {
+      "severity": "major",
+      "description": "NSAIDs blunt the diuretic and natriuretic effect of loop diuretics and reduce renal perfusion, precipitating heart-failure decompensation and acute kidney injury.",
+      "recommendation": "Stop the NSAID. Use acetaminophen for analgesia in heart failure and chronic kidney disease."
+    },
+    "ibuprofen|sacubitril-valsartan": {
+      "severity": "major",
+      "description": "The combination of an NSAID with renin-angiotensin system blockade and a diuretic ('triple whammy') markedly raises the risk of acute kidney injury.",
+      "recommendation": "Avoid NSAIDs entirely. Substitute acetaminophen."
+    },
+    "apixaban|ibuprofen": {
+      "severity": "major",
+      "description": "Additive bleeding risk: NSAIDs impair platelet function and cause gastric mucosal injury alongside direct oral anticoagulation.",
+      "recommendation": "Avoid. If an NSAID is unavoidable, add gastroprotection and counsel on bleeding signs."
+    },
+    "metformin|sacubitril-valsartan": {
+      "severity": "moderate",
+      "description": "Renin-angiotensin system blockade can reduce renal function, raising metformin accumulation and lactic-acidosis risk in chronic kidney disease.",
+      "recommendation": "Monitor renal function; reduce the metformin dose if eGFR falls below 45."
+    },
+    "furosemide|metformin": {
+      "severity": "moderate",
+      "description": "Loop diuretics can reduce renal clearance of metformin and raise its plasma concentration.",
+      "recommendation": "Check renal function after any diuretic dose increase."
+    },
+    "metoprolol succinate|sacubitril-valsartan": {
+      "severity": "moderate",
+      "description": "Additive hypotension, particularly during uptitration of either agent.",
+      "recommendation": "Uptitrate one agent at a time and monitor blood pressure and symptoms."
+    },
+    "amiodarone|atorvastatin": {
+      "severity": "moderate",
+      "description": "Amiodarone inhibits CYP3A4, raising atorvastatin exposure and the risk of myopathy.",
+      "recommendation": "Limit atorvastatin to 20 mg daily with amiodarone; counsel on muscle pain."
+    },
+    "omeprazole|warfarin": {
+      "severity": "moderate",
+      "description": "Omeprazole inhibits CYP2C19 and can modestly potentiate warfarin.",
+      "recommendation": "Monitor INR when starting or stopping the proton-pump inhibitor."
+    },
+    "amoxicillin-clavulanate|warfarin": {
+      "severity": "moderate",
+      "description": "Broad-spectrum antibiotics reduce gut flora vitamin K synthesis, potentiating warfarin.",
+      "recommendation": "Check INR mid-course and at completion."
+    },
+    "apixaban|fluconazole": {
+      "severity": "major",
+      "description": "Fluconazole inhibits CYP3A4 and P-glycoprotein, raising apixaban exposure and bleeding risk.",
+      "recommendation": "Consider an alternative antifungal or a dose adjustment; counsel on bleeding signs."
+    },
+    "lisinopril|spironolactone": {
+      "severity": "moderate",
+      "description": "Additive hyperkalaemia risk from combined renin-angiotensin blockade and potassium-sparing diuresis.",
+      "recommendation": "Check potassium and creatinine within 5-7 days of initiation."
+    },
+    "sacubitril-valsartan|spironolactone": {
+      "severity": "moderate",
+      "description": "Additive hyperkalaemia risk, amplified in chronic kidney disease.",
+      "recommendation": "Check potassium and creatinine within 5-7 days and again at 4 weeks."
+    },
+    "lisinopril|sacubitril-valsartan": {
+      "severity": "contraindicated",
+      "description": "Concurrent ACE inhibitor and sacubitril-valsartan carries a serious risk of angio-oedema.",
+      "recommendation": "Never co-prescribe. Allow a 36-hour washout after stopping the ACE inhibitor."
+    }
+  },
+  "high_alert": [
+    "warfarin",
+    "apixaban",
+    "amiodarone",
+    "insulin",
+    "metformin",
+    "furosemide",
+    "spironolactone",
+    "sacubitril-valsartan"
+  ]
+}

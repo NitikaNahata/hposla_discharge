@@ -1,0 +1,72 @@
+{
+  "_comment": "SYNTHETIC hospital patient index backing the MCP patient_lookup tool. Generated for this capstone. No real patient data or PHI.",
+  "MRN-1001": {
+    "mrn": "MRN-1001",
+    "name": "Aaron Whitfield",
+    "age": 54,
+    "sex": "M",
+    "admission_date": "2026-08-14",
+    "attending": "Dr. R. Okonkwo",
+    "ward": "General Medicine 3B",
+    "primary_diagnosis": "Community-acquired pneumonia, right lower lobe",
+    "problem_list": ["Community-acquired pneumonia", "Essential hypertension"],
+    "pre_admission_medications": ["Lisinopril 10 mg once daily"],
+    "allergies": [],
+    "prior_admissions_12mo": 0,
+    "insurance_tier": "standard",
+    "preferred_clinic": "Riverside Family Practice"
+  },
+  "MRN-2001": {
+    "mrn": "MRN-2001",
+    "name": "Eleanor Prasad",
+    "age": 79,
+    "sex": "F",
+    "admission_date": "2026-08-20",
+    "attending": "Dr. S. Lindqvist",
+    "ward": "Cardiology 5A",
+    "primary_diagnosis": "Acute decompensated heart failure with reduced ejection fraction",
+    "problem_list": [
+      "Heart failure with reduced ejection fraction",
+      "Chronic kidney disease stage 3a",
+      "Type 2 diabetes mellitus",
+      "Atrial fibrillation"
+    ],
+    "pre_admission_medications": [
+      "Furosemide 20 mg once daily",
+      "Metoprolol succinate 25 mg once daily",
+      "Apixaban 5 mg twice daily",
+      "Metformin 1000 mg twice daily",
+      "Ibuprofen 400 mg as needed"
+    ],
+    "allergies": ["Penicillin"],
+    "prior_admissions_12mo": 2,
+    "insurance_tier": "standard",
+    "preferred_clinic": "Northgate Cardiology"
+  },
+  "MRN-3001": {
+    "mrn": "MRN-3001",
+    "name": "Marcus Adeyemi",
+    "age": 68,
+    "sex": "M",
+    "admission_date": "2026-09-01",
+    "attending": "Dr. P. Nakamura",
+    "ward": "General Medicine 3B",
+    "primary_diagnosis": "Deep vein thrombosis with pulmonary embolism",
+    "problem_list": [
+      "Deep vein thrombosis with pulmonary embolism",
+      "Atrial fibrillation",
+      "Chronic obstructive pulmonary disease",
+      "Oropharyngeal candidiasis"
+    ],
+    "pre_admission_medications": [
+      "Warfarin 5 mg once daily",
+      "Tiotropium 18 mcg once daily",
+      "Atorvastatin 40 mg once daily",
+      "Omeprazole 20 mg once daily"
+    ],
+    "allergies": ["Sulfa drugs"],
+    "prior_admissions_12mo": 1,
+    "insurance_tier": "standard",
+    "preferred_clinic": "Riverside Anticoagulation Clinic"
+  }
+}
