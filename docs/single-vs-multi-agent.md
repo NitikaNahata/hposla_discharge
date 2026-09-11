@@ -81,7 +81,7 @@ informative comparison is *single-agent vs. multi-agent within one framework* â€
 orchestration variable. Comparing LangGraph-multi against CrewAI-multi would confound topology with
 framework and answer neither question cleanly.
 
-**On the model provider:** Google Gemini is the only approved provider. `gemini-2.5-flash` is the
+**On the model provider:** Google Gemini is the only approved provider. `gemini-3.6-flash` is the
 default for both workers and critic â€” the reasoning here is structured extraction and routing rather
 than deep synthesis, and Flash's latency makes the multi-agent step count affordable. The critic
 model is configurable separately (`DISCHARGE_CRITIC_MODEL`) so it can be raised to Pro without

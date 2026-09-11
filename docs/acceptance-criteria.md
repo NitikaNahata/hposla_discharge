@@ -88,6 +88,12 @@ raises `ValidationError`, which is caught and routed into the self-healing loop 
 interrupt and exits; process B is launched fresh, loads the checkpoint by `thread_id`, and completes
 the case. State written before the pause is present after the resume.
 
+**A sharp edge worth knowing about.** Because `thread_id = case_id`, re-running a case that already
+completed *resumes* it — the supervisor sees every workstream marked complete and finalizes
+immediately. That is correct resume behaviour, and exactly wrong when the intent was to run the case
+again. `run --fresh` discards the checkpoint first, and
+`test_ac05_clear_thread_discards_a_completed_run` pins the behaviour as a regression test.
+
 ---
 
 ### AC-06 — Tiered memory with recall from an earlier turn
