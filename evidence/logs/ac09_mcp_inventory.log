@@ -1,0 +1,28 @@
+# MCP Server Inventory
+
+**Criteria:** AC-09 (>= 2 tools, >= 1 resource) · AC-10 (langchain-mcp-adapters)  
+**Generated:** 2026-09-09T18:41:46+00:00  
+**Regenerate:** `python scripts/generate_evidence.py`
+
+> All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).
+
+---
+
+- **Server:** `discharge-planning` over `stdio`
+- **Adapter:** `langchain-mcp-adapters`
+- **Tools published:** 4 (criterion requires >= 2)
+- **Resources published:** 2 (criterion requires >= 1)
+
+## Tools
+### `patient_lookup`
+Look up a patient's hospital record by medical record number.
+### `medication_interaction_check`
+Check a medication list for pairwise drug-drug interactions.
+### `schedule_followup`
+Book a follow-up appointment against clinic availability.
+### `check_transport_availability`
+Check patient-transport availability for a discharge.
+
+## Resources
+- `formulary://medications` (static)
+- `discharge://protocol/{condition}` (templated)

@@ -1,0 +1,20 @@
+# AC-05 — Checkpoint Pause and Resume
+
+**Criteria:** AC-05 (deterministically scored)  
+**Generated:** 2026-09-09T19:37:44+00:00  
+**Regenerate:** `python scripts/generate_evidence.py`
+
+> All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).
+
+---
+
+| | process 1 | process 2 |
+|---|---|---|
+| command | `run --pause-after medication` | `resume --case-id CASE-003` |
+| exit code | 0 | 0 |
+| paused at interrupt | yes | — |
+| restored from checkpoint | — | yes |
+
+Checkpoint database: `.state/checkpoints.sqlite`
+
+Transcripts: [`ac05_pause.md`](../transcripts/ac05_pause.md) · [`ac05_resume.md`](../transcripts/ac05_resume.md)

@@ -1,0 +1,31 @@
+# NFR-08 — Context-Window Management
+
+**Criteria:** NFR-08 (summarization / compression)  
+**Generated:** 2026-09-09T19:37:44+00:00  
+**Regenerate:** `python scripts/generate_evidence.py`
+
+> All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).
+
+---
+
+Working memory keeps the most recent **8** turns verbatim.
+Once the transcript passes **3000** estimated tokens,
+everything older is replaced by a running summary that is required to carry forward
+key clinical findings and open issues.
+
+No compression fired across the committed runs: none of the four sample cases
+grew past the threshold. Reporting that honestly is better than inflating a
+sample to manufacture an event.
+
+The mechanism is evidenced instead by its unit tests
+(`tests/test_nfr_compliance.py::test_nfr08_*`), which exercise the trigger
+predicate and the structural preservation of findings, and by
+`route_after_reflection`, which routes to the `compress` node when
+`should_compress(state)` holds.
+
+To see it fire, lower the threshold:
+
+```bash
+DISCHARGE_COMPRESSION_TRIGGER_TOKENS=200 \
+  python -m discharge_copilot run --case data/samples/case_002.json
+```

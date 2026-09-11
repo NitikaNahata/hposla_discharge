@@ -1,0 +1,55 @@
+# AC-08 — Memory Eviction / Importance Policy
+
+**Criteria:** AC-08 (eviction policy)  
+**Generated:** 2026-09-09T18:41:46+00:00  
+**Regenerate:** `python scripts/generate_evidence.py`
+
+> All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).
+
+---
+
+Importance-weighted, with a TTL floor and a per-namespace cap:
+
+```
+effective = base_importance × recency_decay(age) + access_boost(access_count)
+```
+
+Policy for this run: cap 6, TTL 30d, floor 0.25, permanent at or above 0.75.
+
+## Before (8 facts)
+
+| key | kind | base | effective | permanent |
+|---|---|---|---|---|
+| `allergy:penicillin` | allergy | 1.00 | 1.000 | yes |
+| `care_constraint:lives_alone` | care_constraint | 0.80 | 0.821 | yes |
+| `care_constraint:transport` | care_constraint | 0.80 | 0.821 | yes |
+| `adherence_concern:diuretic` | adherence_concern | 0.70 | 0.700 | no |
+| `med_change:ibuprofen` | medication_change | 0.60 | 0.600 | no |
+| `obs:diet` | observation | 0.25 | 0.250 | no |
+| `obs:visitors` | observation | 0.25 | 0.250 | no |
+| `obs:tv` | observation | 0.25 | 0.250 | no |
+
+## Eviction decision
+
+- evaluated: 8
+- kept: 6
+- evicted: 2 (TTL 0, capacity 2)
+- protected by importance: 3
+
+### Reasons
+
+- `obs:visitors` — capacity: namespace over cap of 6; lowest effective importance 0.250
+- `obs:tv` — capacity: namespace over cap of 6; lowest effective importance 0.250
+
+## After (6 facts)
+
+- `allergy:penicillin` (allergy, 1.000)
+- `care_constraint:lives_alone` (care_constraint, 0.821)
+- `care_constraint:transport` (care_constraint, 0.821)
+- `adherence_concern:diuretic` (adherence_concern, 0.700)
+- `med_change:ibuprofen` (medication_change, 0.600)
+- `obs:diet` (observation, 0.250)
+
+**The clinical property that matters:** the penicillin allergy and the care
+constraints survive, while incidental ward observations are dropped. A pure TTL or
+LRU policy could not make that distinction.
