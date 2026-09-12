@@ -1,18 +1,176 @@
 {
-  "timestamp": "2026-09-12T23:19:15.096927+00:00",
+  "timestamp": "2026-09-12T23:26:32.564290+00:00",
   "model": "gemini-1.5-pro",
   "cases": {
     "CASE_001": {
-      "error": "2 validation errors for EducationPacket\nplain_language_summary\n  String should have at least 40 characters [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_too_short\nred_flag_symptoms\n  Value error, red_flag_symptoms must contain at least one symptom [type=value_error, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      "case_id": "CASE_001",
+      "evaluations": [
+        {
+          "metric": "Faithfulness",
+          "worker": "medication",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "Hallucination",
+          "worker": "medication",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "AnswerRelevancy",
+          "worker": "followup",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "AnswerRelevancy",
+          "worker": "education",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "Faithfulness",
+          "worker": "summary",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        }
+      ],
+      "overall_score": 0.0,
+      "pass_rate": 0.0
     },
     "CASE_002": {
-      "error": "2 validation errors for EducationPacket\nplain_language_summary\n  String should have at least 40 characters [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_too_short\nred_flag_symptoms\n  Value error, red_flag_symptoms must contain at least one symptom [type=value_error, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      "case_id": "CASE_002",
+      "evaluations": [
+        {
+          "metric": "Faithfulness",
+          "worker": "medication",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "Hallucination",
+          "worker": "medication",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "AnswerRelevancy",
+          "worker": "followup",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "AnswerRelevancy",
+          "worker": "education",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "Faithfulness",
+          "worker": "summary",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        }
+      ],
+      "overall_score": 0.0,
+      "pass_rate": 0.0
     },
     "CASE_003": {
-      "error": "2 validation errors for EducationPacket\nplain_language_summary\n  String should have at least 40 characters [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_too_short\nred_flag_symptoms\n  Value error, red_flag_symptoms must contain at least one symptom [type=value_error, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      "case_id": "CASE_003",
+      "evaluations": [
+        {
+          "metric": "Faithfulness",
+          "worker": "medication",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "Hallucination",
+          "worker": "medication",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "AnswerRelevancy",
+          "worker": "followup",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "AnswerRelevancy",
+          "worker": "education",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "Faithfulness",
+          "worker": "summary",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        }
+      ],
+      "overall_score": 0.0,
+      "pass_rate": 0.0
     },
     "CASE_004": {
-      "error": "2 validation errors for EducationPacket\nplain_language_summary\n  String should have at least 40 characters [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_too_short\nred_flag_symptoms\n  Value error, red_flag_symptoms must contain at least one symptom [type=value_error, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+      "case_id": "CASE_004",
+      "evaluations": [
+        {
+          "metric": "Faithfulness",
+          "worker": "medication",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "Hallucination",
+          "worker": "medication",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "AnswerRelevancy",
+          "worker": "followup",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "AnswerRelevancy",
+          "worker": "education",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        },
+        {
+          "metric": "Faithfulness",
+          "worker": "summary",
+          "score": 0.0,
+          "is_pass": false,
+          "error": "OpenAI API key is not configured. Set OPENAI_API_KEY in your environment or pass `api_key` to OpenAIModel(...)."
+        }
+      ],
+      "overall_score": 0.0,
+      "pass_rate": 0.0
     }
-  }
+  },
+  "average_score": 0.0,
+  "grade": "D"
 }
