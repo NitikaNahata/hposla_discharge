@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-09-12T23:18:44.048627+00:00",
+  "timestamp": "2026-09-12T23:19:15.096927+00:00",
   "model": "gemini-1.5-pro",
   "cases": {
     "CASE_001": {
-      "error": "'dict' object has no attribute 'name'"
+      "error": "2 validation errors for EducationPacket\nplain_language_summary\n  String should have at least 40 characters [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_too_short\nred_flag_symptoms\n  Value error, red_flag_symptoms must contain at least one symptom [type=value_error, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
     },
     "CASE_002": {
-      "error": "'dict' object has no attribute 'name'"
+      "error": "2 validation errors for EducationPacket\nplain_language_summary\n  String should have at least 40 characters [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_too_short\nred_flag_symptoms\n  Value error, red_flag_symptoms must contain at least one symptom [type=value_error, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
     },
     "CASE_003": {
-      "error": "'dict' object has no attribute 'name'"
+      "error": "2 validation errors for EducationPacket\nplain_language_summary\n  String should have at least 40 characters [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_too_short\nred_flag_symptoms\n  Value error, red_flag_symptoms must contain at least one symptom [type=value_error, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
     },
     "CASE_004": {
-      "error": "'dict' object has no attribute 'name'"
+      "error": "2 validation errors for EducationPacket\nplain_language_summary\n  String should have at least 40 characters [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_too_short\nred_flag_symptoms\n  Value error, red_flag_symptoms must contain at least one symptom [type=value_error, input_value=[], input_type=list]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
     }
   }
 }
