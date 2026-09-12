@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  # Main application service
+  copilot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: discharge-copilot
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - DEBUG=${DEBUG:-false}
+    volumes:
+      - ./data:/app/data:ro
+      - ./.state:/app/.state
+      - ./evidence:/app/evidence
+    working_dir: /app
+    command: run --case data/samples/case_001.json
+    networks:
+      - copilot-network
+
+  # Test runner
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: discharge-copilot-tests
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./:/app
+    working_dir: /app
+    entrypoint: []
+    command: sh -c "pytest -v -m 'not live' --junitxml=junit.xml"
+    networks:
+      - copilot-network
+    depends_on:
+      - copilot
+
+  # Evidence generation
+  evidence:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: discharge-copilot-evidence
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    volumes:
+      - ./data:/app/data:ro
+      - ./evidence:/app/evidence
+      - ./scripts:/app/scripts:ro
+    working_dir: /app
+    entrypoint: []
+    command: sh -c "python scripts/generate_evidence.py"
+    networks:
+      - copilot-network
+    depends_on:
+      - copilot
+
+  # DeepEval LLM-based assessment (Gemini 1.5 Pro)
+  deepeval:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: discharge-copilot-deepeval
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - DEEPEVAL_LLM_MODEL=gemini-1.5-pro
+    volumes:
+      - ./data:/app/data:ro
+      - ./evidence:/app/evidence
+      - ./evaluation:/app/evaluation:ro
+      - ./.git:/app/.git
+    working_dir: /app
+    entrypoint: []
+    command: sh -c "python evaluation/deepeval_runner.py --commit"
+    networks:
+      - copilot-network
+    depends_on:
+      - evidence
+
+networks:
+  copilot-network:
+    driver: bridge

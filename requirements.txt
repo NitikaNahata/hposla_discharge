@@ -34,7 +34,12 @@ streamlit>=1.40
 # --- Support ---
 pydantic>=2.9,<3
 python-dotenv>=1.0
-tenacity>=9.0
+tenacity>=8.4.1,<9.0
 
 # --- Tests / evidence (AC-07 traceability) ---
 pytest>=8.3
+
+# --- LLM-based evaluation (instructor requirement) ---
+# PINNED >=4.0: deepeval 1.x's gpt_model.py imports langchain.schema.HumanMessage,
+# an API removed in langchain 1.x. 4.x dropped that dependency path.
+deepeval>=4.0,<5
