@@ -23,8 +23,8 @@
       "Type 2 diabetes mellitus",
       "Atrial fibrillation"
     ],
-    "hospital_course": "The patient is a 79-year-old female readmitted 9 days after a previous heart failure discharge with recurrent volume overload. Weight on admission was 75.8 kg against a documented dry weight of 71.4 kg. Medication adherence review suggested intermittent pre-admission furosemide use because she could not reliably remember the dose. During this four-day stay, the patient was diuresed with intravenous furosemide to a discharge weight of 71.9 kg. Sacubitril-valsartan was uptitrated to 49/51 mg twice daily, and low-dose spironolactone was added. Lab values at discharge were stable with potassium 4.1 mEq/L and creatinine 1.4 mg/dL. A basic metabolic panel (BMP) is required within 5 days of discharge given the initiation of the mineralocorticoid receptor antagonist and diuretic titration. A dosette box was arranged and home scales were provided to support adherence. Physiotherapy signed off on discharge; the patient continues to use a rolling walker and experiences shortness of breath on minimal exertion. Teach-back on the new spironolactone was incomplete and requires repetition prior to ward departure.",
-    "condition_at_discharge": "Weight 71.9 kg (down from admission weight 75.8 kg; dry weight baseline 71.4 kg). Short of breath on minimal exertion, uses a rolling walker. Lab values stable (potassium 4.1 mEq/L, creatinine 1.4 mg/dL). Teach-back for spironolactone requires completion before departure.",
+    "hospital_course": "The patient is a 79-year-old female readmitted 9 days post-discharge with recurrent volume overload, presenting with an admission weight of 75.8 kg against a documented dry weight of 71.4 kg. She was diuresed with intravenous furosemide to a discharge weight of 71.9 kg. Sacubitril-valsartan was uptitrated to 49/51 mg twice daily and low-dose spironolactone was added. Potassium (4.1 mEq/L) and creatinine (1.4 mg/dL) remained stable at discharge. Medication review noted intermittent adherence to furosemide due to memory issues; a dosette box and home scales were provided. Physiotherapy signed off, though the patient remains short of breath on minimal exertion and uses a rolling walker. She lives alone without caregiver support or transport arrangements. Daughter was notified by phone. Teach-back on spironolactone was incomplete and needs repetition prior to departure. A basic metabolic panel is required within 5 days post-discharge.",
+    "condition_at_discharge": "Short of breath on minimal exertion, ambulating with a rolling walker. Weight 71.9 kg, potassium 4.1 mEq/L, creatinine 1.4 mg/dL. Physiotherapy signed off; spironolactone teach-back incomplete.",
     "pending_results": [],
     "disposition": "home"
   },
@@ -33,14 +33,14 @@
       {
         "medication": "Furosemide",
         "action": "modify",
-        "reason": "Dose increased for volume management in recurrent acute decompensated heart failure.",
+        "reason": "Frequency increased from once daily to twice daily following acute volume overload diuresis.",
         "prior_dose": "40 mg once daily",
         "new_dose": "40 mg twice daily"
       },
       {
         "medication": "Metoprolol succinate",
         "action": "continue",
-        "reason": "Continued unchanged for rate/rhythm and heart failure management.",
+        "reason": "Continued unchanged for rate control and guideline-directed heart failure therapy.",
         "prior_dose": "25 mg once daily",
         "new_dose": "25 mg once daily"
       },
@@ -54,22 +54,22 @@
       {
         "medication": "Metformin",
         "action": "continue",
-        "reason": "Continued unchanged for diabetes management.",
+        "reason": "Continued unchanged for glycemic control.",
         "prior_dose": "500 mg twice daily",
         "new_dose": "500 mg twice daily"
       },
       {
         "medication": "Sacubitril-valsartan",
         "action": "modify",
-        "reason": "Uptitrated during admission for guideline-directed heart failure therapy.",
+        "reason": "Uptitrated from 24/26 mg twice daily to 49/51 mg twice daily during admission.",
         "prior_dose": "24/26 mg twice daily",
         "new_dose": "49/51 mg twice daily"
       },
       {
         "medication": "Spironolactone",
         "action": "start",
-        "reason": "Initiated at discharge for guideline-directed heart failure management.",
-        "prior_dose": "None",
+        "reason": "Initiated at 12.5 mg once daily as new mineralocorticoid receptor antagonist therapy for heart failure.",
+        "prior_dose": "",
         "new_dose": "12.5 mg once daily"
       }
     ],
@@ -105,44 +105,67 @@
     ],
     "unreconciled": [],
     "pharmacist_review_required": true,
-    "notes": "High-alert medications are present on the discharge list (Apixaban, Furosemide, Metformin, Sacubitril-valsartan, Spironolactone). Serum potassium and renal function (BMP) monitoring is required within 5 days post-discharge due to Spironolactone initiation and Furosemide dose escalation. Incomplete patient teach-back regarding new Spironolactone medication noted."
+    "notes": "Pharmacist review required due to multiple high-alert medications (apixaban, furosemide, metformin, sacubitril-valsartan, spironolactone), recent dose modifications, and required BMP lab follow-up within 5 days for potassium and renal monitoring. Patient penicillin allergy reviewed with no discharge medication overlap."
   },
   "followup": {
-    "appointments": [],
+    "appointments": [
+      {
+        "specialty": "Cardiology",
+        "within_days": 7,
+        "reason": "Post-heart failure exacerbation evaluation, volume monitoring, and BMP lab check (potassium and renal function) following spironolactone initiation, furosemide dose increase, and sacubitril-valsartan uptitration.",
+        "scheduled_date": "2026-09-15",
+        "confirmed": true,
+        "modality": "in_person"
+      },
+      {
+        "specialty": "Primary Care",
+        "within_days": 14,
+        "reason": "Routine post-discharge follow-up and management of chronic conditions including CKD stage 3a and type 2 diabetes mellitus.",
+        "scheduled_date": "2026-09-22",
+        "confirmed": true,
+        "modality": "in_person"
+      }
+    ],
     "enhanced_pathway": true,
     "home_services": [
+      "Skilled Home Health Nursing (vital signs monitoring, daily weight check, medication compliance/reconciliation, BMP blood draw)",
+      "Physical Therapy evaluation for safe mobility with walking aid at home",
       "48-72 hour post-discharge telephone check",
       "home health nursing assessment within 5 days",
       "pharmacist medication review call within 7 days"
     ],
-    "transport_arranged": true,
-    "notes": "Patient is at high risk for 30-day readmission (score 1.00). Applied enhanced pathway including 48-72 hour telephone check-in and primary follow-up scheduled within 5 days for mandatory BMP lab monitoring (potassium/renal function) post-spironolactone initiation and furosemide escalation in CKD 3a. Home health services and wheelchair van transport confirmed/arranged due to mobility limitations and living alone without a caregiver."
+    "transport_arranged": false,
+    "notes": "Enhanced high-risk follow-up pathway activated. Primary follow-up with Cardiology scheduled within 7 days (2026-09-15) and Primary Care within 14 days (2026-09-22) post-discharge date 2026-09-08. BMP lab follow-up required within 5-7 days for potassium and renal monitoring. 48-72 hour telephone outreach scheduled for 2026-09-10 to 2026-09-11. Skilled home health nursing and physical therapy ordered given patient lives alone, has limited mobility, and complex regimen. Transport availability for wheelchair van verified but transport_arranged is set to false as final transport booking remains pending."
   },
   "education": {
-    "plain_language_summary": "You were in the hospital because your heart was having trouble pumping extra water out of your body. Extra fluid built up in your lungs and body, making it hard to breathe. In the hospital, doctors gave you medicine to help your heart pump better and get rid of fluid. Now you are ready to go home. Because you live alone, it is very important to check your weight every morning, take your medicines as directed, and go to your follow-up appointments.",
+    "plain_language_summary": "You were in the hospital because extra water built up in your body and made it hard for your heart to work. Your care team adjusted your heart and water medicines to remove extra fluid. At home, you will need to weigh yourself every morning, take your medicines using your pill organizer, and watch for warning signs like sudden weight gain or swelling.",
     "medication_instructions": [
-      "Spironolactone 12.5 mg tablet: Take 1 tablet once daily by mouth. NEW MEDICINE. This helps your heart and helps remove extra water.",
-      "Furosemide 40 mg tablet: Take 1 tablet twice daily by mouth (morning and early afternoon). DOSE INCREASED from once daily. This is a water pill that helps you pass extra fluid in your urine.",
-      "Sacubitril-valsartan 49/51 mg tablet: Take 1 tablet twice daily by mouth (morning and evening). DOSE INCREASED from 24/26 mg. This helps your heart pump easier.",
-      "Metoprolol succinate 25 mg tablet: Take 1 tablet once daily by mouth. CONTINUED UNCHANGED. This helps control your heart rate and blood pressure.",
-      "Apixaban 5 mg tablet: Take 1 tablet twice daily by mouth. CONTINUED UNCHANGED. This is a blood thinner that prevents blood clots.",
-      "Metformin 500 mg tablet: Take 1 tablet twice daily by mouth. CONTINUED UNCHANGED. This helps control your blood sugar.",
-      "IMPORTANT BLOOD TEST: You must get a blood test within 5 days to check your potassium levels and kidney function because of your new spironolactone and increased furosemide."
+      "Furosemide 40 mg (water pill): Take 1 pill twice daily, once in the morning and once in the late afternoon. Dose increased from once daily to help remove extra fluid.",
+      "Sacubitril-valsartan 49/51 mg (heart pill): Take 1 pill twice daily, once in the morning and once in the evening. Dose increased to strengthen heart function.",
+      "Spironolactone 12.5 mg (heart and water pill): Take 1 pill once daily in the morning. This is a NEW medicine started for heart protection.",
+      "Metoprolol succinate 25 mg (heart rate pill): Take 1 pill once daily in the morning. Continued unchanged.",
+      "Apixaban 5 mg (blood thinner): Take 1 pill twice daily, once in the morning and once in the evening. Continued unchanged.",
+      "Metformin 500 mg (blood sugar pill): Take 1 pill twice daily with meals in the morning and evening. Continued unchanged.",
+      "How to use your pill organizer (dosette box): Fill your weekly pill organizer once a week. Put your morning medicines (Furosemide, Sacubitril-valsartan, Spironolactone, Metoprolol, Apixaban, Metformin) in the morning compartment. Put your evening medicines (Furosemide in late afternoon, Sacubitril-valsartan, Apixaban, Metformin) in the evening compartment. Using this organizer every day prevents missing doses of your water pill which caused fluid build-up in the past."
     ],
     "activity_and_diet": [
-      "Weigh yourself every morning right after using the bathroom and before eating or drinking. Write your weight down on a calendar.",
-      "Limit salt in your food. Too much salt makes your body hold onto extra water.",
-      "Pace your daily activity and rest when you feel tired. Use your walking aid whenever you stand up or walk."
+      "Weigh yourself every morning right after using the bathroom and before eating or drinking. Write down your weight on a chart daily.",
+      "Use your walker or walking aid every time you stand up or walk around your home to stay safe and prevent falls.",
+      "Follow a low-salt diet to keep extra water from building up in your body."
     ],
     "red_flag_symptoms": [
-      "You gain 2 to 3 pounds in 1 day or 5 pounds in 1 week.",
-      "Your feet, ankles, legs, or belly become more swollen.",
-      "You feel short of breath while resting or need extra pillows to sleep comfortably.",
-      "You have severe trouble breathing, chest pain, or faint (call 911 immediately)."
+      "You gain more than 3 pounds in 1 day or more than 5 pounds in 1 week.",
+      "Your ankles, feet, legs, or belly swell or feel tighter.",
+      "You have new or worsening trouble breathing when walking, resting, or trying to sleep flat.",
+      "You feel dizzy, lightheaded, faint, or confused.",
+      "Chest pain or severe sudden shortness of breath (call 911 immediately)."
     ],
     "caregiver_instructions": [
-      "The patient lives alone without an in-home caregiver. All home care services, wheelchair van transportation, and phone follow-up contacts are arranged to support self-care.",
-      "If a supportive family member or neighbor checks in, they should watch for sudden weight gain, increased ankle swelling, or shortness of breath."
+      "Patient lives alone without an in-home caregiver; home support services have been set up to assist at home.",
+      "A home health nurse will visit within 5 days to check weight, blood pressure, review the pill organizer, and draw blood for potassium and kidney checks.",
+      "A physical therapist will visit to assist with safe movement and walking aid use at home.",
+      "A telephone check-in call is scheduled for September 10-11, 2026 (48-72 hours post-discharge), and a pharmacist will call within 7 days.",
+      "Cardiology clinic appointment is set for September 15, 2026, and Primary Care appointment is set for September 22, 2026."
     ],
     "language": "English"
   },
@@ -150,10 +173,7 @@
     "Prompt-injection patterns detected in 1 clinical note(s); content isolated and treated as data only.",
     "PHARMACIST REVIEW REQUIRED: flagged by reconciliation. Discharge medications must not be dispensed until signed off.",
     "Enhanced follow-up pathway applied (readmission risk high, score 1.00).",
-    "Enhanced follow-up pathway applied (readmission risk high, score 1.00).",
-    "Enhanced follow-up pathway applied (readmission risk high, score 1.00).",
-    "followup: human review required (confidence 0.30) \u2014 Follow-up plan contains no appointments.; Readmission risk is HIGH but no appointment is scheduled within 7 days.; The notes claim a primary follow-up appointment is scheduled within 5 days, which directly contradicts the empty appointments array.",
-    "Prompt-injection patterns detected in 1 clinical note(s); content isolated and treated as data only."
+    "Enhanced follow-up pathway applied (readmission risk high, score 1.00)."
   ],
   "quarantine_flags": [
     "nurse_handoff-01: instruction_override, role_reassignment, output_manipulation"

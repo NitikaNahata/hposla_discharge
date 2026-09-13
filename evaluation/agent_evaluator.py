@@ -14,28 +14,21 @@ This is INSTRUCTOR-REQUIRED evaluation (not part of capstone rubric).
 
 from __future__ import annotations
 
-import json
 import sys
 from pathlib import Path
-from typing import Any
-
-# DeepEval imports
-from deepeval.metrics import (
-    ContextualRelevancy,
-    Faithfulness,
-    AnswerRelevancy,
-)
-from deepeval.test_case import LLMTestCase
+from typing import Any, ClassVar
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from discharge_copilot.schemas import (
     DischargeSummary,
-    MedicationReconciliation,
-    FollowUpPlan,
     EducationPacket,
+    FollowUpPlan,
+    MedicationReconciliation,
 )
+from evaluation.grading import grade_for
 
 # ============================================================================
 # Evaluation Metrics
@@ -45,7 +38,7 @@ from discharge_copilot.schemas import (
 class ToolUsageEvaluator:
     """Did the agent call the right tools for this workstream?"""
 
-    EXPECTED_TOOLS: dict[str, set[str]] = {
+    EXPECTED_TOOLS: ClassVar[dict[str, set[str]]] = {
         "summary": {"patient_lookup", "search_clinical_guidance"},
         "medication": {
             "medication_interaction_check",
@@ -83,9 +76,9 @@ class ToolUsageEvaluator:
         return {
             "worker": worker,
             "score": round(score, 2),
-            "correct_tools": sorted(list(correct)),
-            "unexpected_tools": sorted(list(unexpected)),
-            "missed_tools": sorted(list(missed)),
+            "correct_tools": sorted(correct),
+            "unexpected_tools": sorted(unexpected),
+            "missed_tools": sorted(missed),
             "rationale": (
                 f"{len(correct)}/{len(expected)} expected tools called; "
                 f"{len(unexpected)} unexpected calls"
@@ -96,10 +89,12 @@ class ToolUsageEvaluator:
 class AnswerQualityEvaluator:
     """Is the agent's output grounded, complete, and clinically safe?"""
 
+    HIGH_RISK_FOLLOWUP_WINDOW_DAYS: ClassVar[int] = 7
+    MIN_PLAIN_LANGUAGE_SUMMARY_CHARS: ClassVar[int] = 100
+    MIN_HOSPITAL_COURSE_CHARS: ClassVar[int] = 50
+
     @staticmethod
-    def evaluate_medication(
-        artifact: MedicationReconciliation, patient_context: str
-    ) -> dict[str, Any]:
+    def evaluate_medication(artifact: MedicationReconciliation) -> dict[str, Any]:
         """Evaluate medication reconciliation quality."""
         issues: list[str] = []
         score = 1.0
@@ -110,12 +105,13 @@ class AnswerQualityEvaluator:
             score -= 0.3
 
         # Check 2: Interactions documented
-        if artifact.highest_severity in {"major", "contraindicated"} and not artifact.pharmacist_review_required:
+        serious_interaction = artifact.highest_severity in {"major", "contraindicated"}
+        if serious_interaction and not artifact.pharmacist_review_required:
             issues.append("Serious interaction not flagged for pharmacist review")
             score -= 0.2
 
         # Check 3: Unreconciled items explained
-        if artifact.unreconciled and not artifact.rationale:
+        if artifact.unreconciled and not artifact.notes:
             issues.append("Unreconciled medications listed without explanation")
             score -= 0.1
 
@@ -147,7 +143,10 @@ class AnswerQualityEvaluator:
             if not artifact.enhanced_pathway:
                 issues.append("HIGH risk but enhanced pathway not applied")
                 score -= 0.2
-            soon = [a for a in artifact.appointments if a.within_days <= 7]
+            soon = [
+                a for a in artifact.appointments
+                if a.within_days <= AnswerQualityEvaluator.HIGH_RISK_FOLLOWUP_WINDOW_DAYS
+            ]
             if not soon:
                 issues.append("HIGH risk but no appointment within 7 days")
                 score -= 0.2
@@ -187,7 +186,11 @@ class AnswerQualityEvaluator:
             score -= 0.3
 
         # Check 3: Language/readability
-        if not artifact.plain_language_summary or len(artifact.plain_language_summary) < 100:
+        if (
+            not artifact.plain_language_summary
+            or len(artifact.plain_language_summary)
+            < AnswerQualityEvaluator.MIN_PLAIN_LANGUAGE_SUMMARY_CHARS
+        ):
             issues.append("Plain language summary too brief or missing")
             score -= 0.1
 
@@ -211,7 +214,10 @@ class AnswerQualityEvaluator:
         score = 1.0
 
         # Check 1: Clinical narrative present
-        if not artifact.hospital_course or len(artifact.hospital_course) < 50:
+        if (
+            not artifact.hospital_course
+            or len(artifact.hospital_course) < AnswerQualityEvaluator.MIN_HOSPITAL_COURSE_CHARS
+        ):
             issues.append("Hospital course narrative missing or too brief")
             score -= 0.2
 
@@ -245,7 +251,7 @@ class AgentAlignmentEvaluator:
 
     @staticmethod
     def evaluate_tool_selection_appropriateness(
-        worker: str, tools_called: list[str], context: str
+        worker: str, tools_called: list[str]
     ) -> dict[str, Any]:
         """Score if tool selection matches context appropriateness."""
         # Define when tools SHOULD be called
@@ -274,7 +280,7 @@ class AgentAlignmentEvaluator:
         return {
             "worker": worker,
             "alignment_score": round(alignment_score, 2),
-            "tools_called": sorted(list(called_set)),
+            "tools_called": sorted(called_set),
             "expected_triggers": expected_for_context,
             "note": "Score 1.0 = all tools called are contextually appropriate",
         }
@@ -293,29 +299,29 @@ def generate_report(
 ) -> dict[str, Any]:
     """Generate comprehensive agent evaluation report."""
 
-    report = {
+    report: dict[str, Any] = {
         "case_id": case_id,
         "evaluation_type": "agent_quality_and_alignment",
         "workers": {},
     }
 
     # Medication evaluation
-    if "medications" in artifacts and artifacts["medications"]:
+    if artifacts.get("medications"):
         med_artifact = artifacts["medications"]
         report["workers"]["medication"] = {
             "tool_usage": ToolUsageEvaluator.evaluate(
                 "medication", tools_called.get("medication", [])
             ),
             "answer_quality": AnswerQualityEvaluator.evaluate_medication(
-                med_artifact, str(patient_context)
+                med_artifact
             ),
             "alignment": AgentAlignmentEvaluator.evaluate_tool_selection_appropriateness(
-                "medication", tools_called.get("medication", []), str(patient_context)
+                "medication", tools_called.get("medication", [])
             ),
         }
 
     # Followup evaluation
-    if "followup" in artifacts and artifacts["followup"]:
+    if artifacts.get("followup"):
         followup_artifact = artifacts["followup"]
         risk_tier = patient_context.get("risk_tier", "unknown")
         report["workers"]["followup"] = {
@@ -326,12 +332,12 @@ def generate_report(
                 followup_artifact, risk_tier
             ),
             "alignment": AgentAlignmentEvaluator.evaluate_tool_selection_appropriateness(
-                "followup", tools_called.get("followup", []), str(patient_context)
+                "followup", tools_called.get("followup", [])
             ),
         }
 
     # Education evaluation
-    if "education" in artifacts and artifacts["education"]:
+    if artifacts.get("education"):
         edu_artifact = artifacts["education"]
         has_meds = bool(patient_context.get("discharge_medications", []))
         report["workers"]["education"] = {
@@ -342,12 +348,12 @@ def generate_report(
                 edu_artifact, has_meds
             ),
             "alignment": AgentAlignmentEvaluator.evaluate_tool_selection_appropriateness(
-                "education", tools_called.get("education", []), str(patient_context)
+                "education", tools_called.get("education", [])
             ),
         }
 
     # Summary evaluation
-    if "summary" in artifacts and artifacts["summary"]:
+    if artifacts.get("summary"):
         summary_artifact = artifacts["summary"]
         primary_dx = patient_context.get("primary_diagnosis", "")
         report["workers"]["summary"] = {
@@ -358,7 +364,7 @@ def generate_report(
                 summary_artifact, primary_dx
             ),
             "alignment": AgentAlignmentEvaluator.evaluate_tool_selection_appropriateness(
-                "summary", tools_called.get("summary", []), str(patient_context)
+                "summary", tools_called.get("summary", [])
             ),
         }
 
@@ -371,15 +377,10 @@ def generate_report(
         avg = (quality_score + tool_score + alignment_score) / 3
         overall_scores.append(avg)
 
-    report["overall_score"] = round(
-        sum(overall_scores) / len(overall_scores), 2
-    ) if overall_scores else 0.0
-    report["grade"] = (
-        "A" if report["overall_score"] >= 0.90
-        else "B" if report["overall_score"] >= 0.80
-        else "C" if report["overall_score"] >= 0.70
-        else "D"
+    report["overall_score"] = (
+        round(sum(overall_scores) / len(overall_scores), 2) if overall_scores else 0.0
     )
+    report["grade"] = grade_for(report["overall_score"])
 
     return report
 

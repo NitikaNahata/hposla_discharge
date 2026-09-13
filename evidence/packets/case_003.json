@@ -19,8 +19,8 @@
       "Oropharyngeal candidiasis",
       "Chronic obstructive pulmonary disease"
     ],
-    "hospital_course": "A 68-year-old male was admitted with left calf swelling and pleuritic chest pain. Doppler ultrasound confirmed an extensive left femoropopliteal deep vein thrombosis (DVT), and CT pulmonary angiography demonstrated bilateral segmental pulmonary emboli (PE) without right heart strain. He remained hemodynamically stable throughout admission. Anticoagulation was continued with warfarin, with his discharge INR at 2.4 and rising, and dose increased to 7.5 mg daily. During admission, the patient developed rapid atrial fibrillation with heart rates to 150, for which amiodarone was initiated for rhythm control with good response. Following a course of inhaled steroids for COPD, he developed oropharyngeal candidiasis and was started on a 7-day course of fluconazole. Because amiodarone and fluconazole both substantially potentiate warfarin, urgent review by the anticoagulation clinic was requested prior to his first post-discharge dose, with INR recheck planned within 3 days. Discharge education was completed with his son present, who will assist with medication management. The patient requested clarification regarding why his home omeprazole was discontinued during admission.",
-    "condition_at_discharge": "Hemodynamically stable. Rapid atrial fibrillation settled on amiodarone. DVT and bilateral PE treated with warfarin (INR 2.4, rising). Oropharyngeal candidiasis responding to fluconazole.",
+    "hospital_course": "A 68-year-old male with a history of COPD presented with left calf swelling and pleuritic chest pain and was admitted on 2026-09-01. Doppler ultrasound confirmed an extensive left femoropopliteal deep vein thrombosis, and CT pulmonary angiography demonstrated bilateral segmental pulmonary emboli without right heart strain. The patient remained hemodynamically stable throughout admission and was managed with warfarin anticoagulation. During hospitalization, he developed rapid atrial fibrillation with rates up to 150 bpm; amiodarone was initiated for rhythm control and his rate settled. Additionally, following a course of inhaled steroids, he developed oropharyngeal candidiasis and was started on a seven-day course of fluconazole. On the day of discharge (2026-09-06), his INR was 2.4 and rising, with the warfarin dose increased to 7.5 mg daily. Due to significant interactions with amiodarone and fluconazole potentiating warfarin, urgent anticoagulation clinic review was requested prior to the first post-discharge dose, with repeat INR recommended within 3 days. The patient noted that his omeprazole was stopped during admission and requested clarification regarding its restart.",
+    "condition_at_discharge": "Hemodynamically stable, rapid atrial fibrillation resolved and rate controlled on amiodarone, INR 2.4 and rising.",
     "pending_results": [],
     "disposition": "home"
   },
@@ -29,132 +29,131 @@
       {
         "medication": "Warfarin",
         "action": "modify",
-        "reason": "Dose increased from 5 mg daily to 7.5 mg daily during admission for DVT/PE treatment.",
+        "reason": "Dose increased during admission for DVT/PE management; INR on discharge 2.4 and rising.",
         "prior_dose": "5 mg once daily",
         "new_dose": "7.5 mg once daily"
       },
       {
         "medication": "Tiotropium",
         "action": "continue",
-        "reason": "Continued at pre-admission dose.",
+        "reason": "Continued from pre-admission list.",
         "prior_dose": "18 mcg once daily",
         "new_dose": "18 mcg once daily"
       },
       {
         "medication": "Atorvastatin",
         "action": "continue",
-        "reason": "Continued at pre-admission dose.",
+        "reason": "Continued from pre-admission list.",
         "prior_dose": "40 mg once daily",
         "new_dose": "40 mg once daily"
       },
       {
         "medication": "Amiodarone",
         "action": "start",
-        "reason": "Initiated during admission for rapid atrial fibrillation rhythm control.",
-        "prior_dose": "None",
+        "reason": "Initiated during admission for rate/rhythm control of new-onset rapid atrial fibrillation.",
+        "prior_dose": "",
         "new_dose": "200 mg once daily"
       },
       {
         "medication": "Fluconazole",
         "action": "start",
-        "reason": "Initiated for a 7-day course for oropharyngeal candidiasis.",
-        "prior_dose": "None",
+        "reason": "Initiated for a 7-day course to treat oropharyngeal candidiasis.",
+        "prior_dose": "",
         "new_dose": "100 mg once daily"
       }
     ],
     "interactions": [
       {
-        "drug_a": "Warfarin",
-        "drug_b": "Amiodarone",
-        "severity": "major",
-        "description": "Amiodarone inhibits warfarin metabolism (CYP2C9/3A4), increasing warfarin levels and raising INR and bleeding risk.",
-        "recommendation": "Urgent anticoagulation clinic review and early INR monitoring post-discharge."
+        "drug_a": "Fluconazole",
+        "drug_b": "Warfarin",
+        "severity": "contraindicated",
+        "description": "Fluconazole strongly inhibits CYP2C9, the main enzyme clearing S-warfarin. INR can rise sharply within 2-3 days, with a substantial bleeding risk.",
+        "recommendation": "Avoid the combination where an alternative antifungal exists. If unavoidable, reduce the warfarin dose and recheck INR within 3 days with anticoagulation clinic oversight."
       },
       {
-        "drug_a": "Warfarin",
-        "drug_b": "Fluconazole",
+        "drug_a": "Amiodarone",
+        "drug_b": "Warfarin",
         "severity": "major",
-        "description": "Fluconazole is a potent CYP2C9 inhibitor that markedly increases warfarin concentration and bleeding risk.",
-        "recommendation": "Monitor INR closely during the fluconazole course and adjust warfarin dosage."
+        "description": "Amiodarone inhibits warfarin metabolism and its long half-life means the effect accumulates over weeks. INR typically rises with a delayed onset.",
+        "recommendation": "Anticipate a warfarin dose reduction of roughly one third. Recheck INR within 3-5 days and monitor weekly for the first month."
+      },
+      {
+        "drug_a": "Amiodarone",
+        "drug_b": "Atorvastatin",
+        "severity": "moderate",
+        "description": "Amiodarone inhibits CYP3A4, raising atorvastatin exposure and the risk of myopathy.",
+        "recommendation": "Limit atorvastatin to 20 mg daily with amiodarone; counsel on muscle pain."
       }
     ],
     "unreconciled": [
       "Omeprazole 20 mg once daily"
     ],
     "pharmacist_review_required": true,
-    "notes": "Automated interaction tool timed out; manual analysis verified major interactions between Warfarin, Amiodarone, and Fluconazole. Omeprazole lacks documented discontinuation rationale."
+    "notes": "Pharmacist review required due to high-alert medications (warfarin, amiodarone), a contraindicated interaction between fluconazole and warfarin, a major interaction between amiodarone and warfarin, and an unreconciled pre-admission medication (omeprazole)."
   },
   "followup": {
     "appointments": [
       {
         "specialty": "Anticoagulation Clinic",
         "within_days": 3,
-        "reason": "Urgent INR monitoring due to warfarin dose increase and major drug interactions with newly started amiodarone and fluconazole",
-        "scheduled_date": "",
-        "confirmed": false,
+        "reason": "Urgent INR monitoring due to Warfarin dose change and Fluconazole/Amiodarone drug interactions",
+        "scheduled_date": "2026-09-09",
+        "confirmed": true,
         "modality": "in_person"
       },
       {
         "specialty": "Primary Care",
         "within_days": 7,
-        "reason": "Comprehensive post-discharge follow-up for DVT/PE, AFib rhythm control, and medication reconciliation",
-        "scheduled_date": "",
-        "confirmed": false,
+        "reason": "High-risk readmission follow-up for DVT/PE, AFib, COPD, and medication reconciliation",
+        "scheduled_date": "2026-09-12",
+        "confirmed": true,
         "modality": "in_person"
-      },
-      {
-        "specialty": "Discharge Support Team",
-        "within_days": 2,
-        "reason": "48-72 hour post-discharge telephone check for high-risk enhanced pathway",
-        "scheduled_date": "",
-        "confirmed": false,
-        "modality": "phone"
       }
     ],
     "enhanced_pathway": true,
     "home_services": [
-      "Home health nursing for INR monitoring and complex medication regimen education",
+      "Home health nursing for INR monitoring and complex medication reconciliation",
       "48-72 hour post-discharge telephone check",
       "home health nursing assessment within 5 days",
       "pharmacist medication review call within 7 days"
     ],
     "transport_arranged": false,
-    "notes": "High readmission risk (score 0.64) triggers enhanced pathway. Early Anticoagulation Clinic follow-up required within 3 days due to concurrent initiation of amiodarone and fluconazole with warfarin. Automated scheduling tool timed out during session; manual appointment confirmation required by discharge coordinator."
+    "notes": "Enhanced pathway applied for high readmission risk (score 0.64). Urgent 3-day Anticoagulation Clinic visit scheduled for high bleeding risk from Warfarin interaction with Fluconazole and Amiodarone. Primary Care booked within 6 days (<=7 day window). 48-72 hour telephone check scheduled."
   },
   "education": {
-    "plain_language_summary": "You were in the hospital for a blood clot in your leg and lung, an irregular heartbeat, and a mouth yeast infection. You are ready to go home. You have new and updated medicines that need careful monitoring. You must get a blood check within 3 days, answer a phone check within 2 days, and see your primary care doctor within 7 days. Your son, Daniel Adeyemi, and home health nurses will help you stay safe at home.",
+    "plain_language_summary": "You were in the hospital for a blood clot in your leg and lung, a new irregular heartbeat, and a yeast infection in your mouth. You have new and changed medicines that help prevent clots and keep your heart beating regularly. You will need close follow-up visits and home nurse checks to make sure your blood thinner level is safe. Do not restart any home medicines that were stopped in the hospital without talking to your doctor.",
     "medication_instructions": [
-      "Warfarin 7.5 mg: Take 1 tablet by mouth once daily in the evening. Dose was increased from 5 mg. This blood thinner interacts with Amiodarone and Fluconazole, so you must get your blood tested within 3 days.",
-      "Amiodarone 200 mg: Take 1 tablet by mouth once daily. This is a new heart rhythm medicine started in the hospital.",
-      "Fluconazole 100 mg: Take 1 tablet by mouth once daily for 7 days only, then stop. This is a new medicine for a mouth yeast infection.",
-      "Tiotropium 18 mcg: Inhale 1 dose once daily. Continued at your usual dose for breathing.",
-      "Atorvastatin 40 mg: Take 1 tablet by mouth once daily in the evening. Continued at your usual dose for cholesterol.",
-      "Omeprazole 20 mg: This medicine is unreconciled. Do not take Omeprazole until you talk to your doctor or pharmacist."
+      "Warfarin 7.5 mg once daily: Take 1 time each day. This is a blood thinner to treat blood clots. Your dose was increased in the hospital. Your other medicines make Warfarin stronger, so you need frequent blood checks.",
+      "Amiodarone 200 mg once daily: Take 1 time each day to help keep your heart rate and rhythm steady.",
+      "Fluconazole 100 mg once daily: Take 1 time each day for 7 days to treat the yeast infection in your mouth.",
+      "Tiotropium 18 mcg once daily: Inhale 1 time each day to help keep your airways open.",
+      "Atorvastatin 40 mg once daily: Take 1 time each day to lower cholesterol and protect your heart.",
+      "Omeprazole 20 mg once daily (STOPPED): Do NOT take Omeprazole at home. This medicine was stopped in the hospital and left unreconciled. Do not restart taking Omeprazole unless your primary care doctor reviews it and tells you to take it."
     ],
     "activity_and_diet": [
-      "Keep your daily amount of green leafy vegetables steady. Do not suddenly eat much more or much less of them while taking Warfarin.",
-      "Do not take new over-the-counter pain medicines like ibuprofen, naproxen, or aspirin without checking with your doctor or pharmacist first.",
-      "Rest as needed and follow instructions from your home health nurse for blood checks."
+      "Keep a steady diet when taking Warfarin. Eat consistent amounts of green leafy vegetables each day.",
+      "Drink plenty of water and rest as you recover.",
+      "Avoid heavy lifting or activities that could cause a fall or cut while on blood thinners."
     ],
     "red_flag_symptoms": [
-      "Bleeding from a cut or wound that will not stop after pressing on it for 10 minutes.",
-      "Blood in your spit, vomit that looks like dark coffee grounds, or coughing up blood.",
-      "Bright red blood in your stool (poop) or dark, black, sticky stools.",
-      "Red, pink, or dark brown urine (pee).",
-      "Sudden new swelling, severe pain, warmth, or redness in your leg.",
-      "New or sudden chest pain, chest pressure, or severe shortness of breath.",
-      "Sudden severe headache, dizziness, fainting, weakness, or any head injury or fall."
+      "Any unusual bleeding, such as bleeding gums, nosebleeds lasting more than 10 minutes, dark or black tarry stools, pink or red urine, or coughing up blood.",
+      "Sudden or large bruises that appear without any injury.",
+      "Sudden shortness of breath or trouble breathing.",
+      "Chest pain, tightness, or a fast or fluttering heartbeat.",
+      "New or worsening swelling, pain, warmth, or redness in your legs or ankles.",
+      "Gaining more than 3 pounds in one day or 5 pounds in one week."
     ],
     "caregiver_instructions": [
-      "Help the patient take all medicines at the right times and do not double any missed doses.",
-      "Ensure the patient attends the Anticoagulation Clinic within 3 days for an urgent blood test (INR test).",
-      "Watch for red-flag signs such as unusual bleeding, severe bruising, new leg swelling, or shortness of breath.",
-      "Be ready for the post-discharge phone call within 2 days and the home health nurse visits."
+      "Daniel Adeyemi (son): Help make sure medicines are taken exactly as written every day, especially Warfarin and the 7-day course of Fluconazole.",
+      "Ensure the patient does NOT resume taking Omeprazole at home without doctor approval.",
+      "Help keep track of upcoming appointments: Anticoagulation Clinic on September 9, 2026, and Primary Care on September 12, 2026.",
+      "Watch for red-flag signs of bleeding, swelling, or breathing changes, and call for medical help right away if seen."
     ],
     "language": "English"
   },
   "escalations": [
-    "PHARMACIST REVIEW REQUIRED: Warfarin + Amiodarone (major); Warfarin + Fluconazole (major). Discharge medications must not be dispensed until signed off.",
+    "PHARMACIST REVIEW REQUIRED: Fluconazole + Warfarin (contraindicated); Amiodarone + Warfarin (major). Discharge medications must not be dispensed until signed off.",
+    "Enhanced follow-up pathway applied (readmission risk high, score 0.64).",
     "Enhanced follow-up pathway applied (readmission risk high, score 0.64)."
   ],
   "quarantine_flags": [],

@@ -1,7 +1,7 @@
 # Multi-Agent Run Transcript — CASE-004
 
 **Criteria:** AC-02 (supervisor + workers) · AC-03 (conditional routing) · AC-04 (structured output) · AC-11 (agentic RAG) · AC-12 (reflection)  
-**Generated:** 2026-09-12T23:18:42+00:00  
+**Generated:** 2026-09-13T05:18:03+00:00  
 **Regenerate:** `python scripts/generate_evidence.py`
 
 > All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).
@@ -15,33 +15,33 @@ The supervisor plans, dispatches to specialist workers, and every artifact passe
 ## Run timeline
 
 
-### `     369ms` → node `intake`
+### `     317ms` → node `intake`
 
-`     369ms` **QUARANTINE** 1/5 note(s) flagged: ['nurse_handoff-01: instruction_override, role_reassignment, output_manipulation'] → `isolated_as_data_not_instructions`
+`     317ms` **QUARANTINE** 1/5 note(s) flagged: ['nurse_handoff-01: instruction_override, role_reassignment, output_manipulation'] → `isolated_as_data_not_instructions`
 
-`     369ms` **RISK** tier **high** (score 1.00) — readmitted within the last 12 months, 5 or more discharge medications, lives alone with no in-home support, aged 75 or over, limited mobility, three or more active problems, diagnosis with a high 30-day readmission rate, no identified caregiver
+`     317ms` **RISK** tier **high** (score 1.00) — readmitted within the last 12 months, 5 or more discharge medications, lives alone with no in-home support, aged 75 or over, limited mobility, three or more active problems, diagnosis with a high 30-day readmission rate, no identified caregiver
 
-`    4620ms` **MEMORY_OP** `{"op": "recall", "tier": "multi", "count": 8, "keys": ["allergy:penicillin", "care_constraint:no_caregiver", "care_constraint:lives_alone", "care_constraint:mobility", "enhanced_pathway:CASE-002", "admission:CASE-004", "admission:CASE-002", "med_change:CASE-004:sacubitril-valsartan"], "cross_session": true}`
+`    3962ms` **MEMORY_OP** `{"op": "recall", "tier": "multi", "count": 8, "keys": ["allergy:penicillin", "care_constraint:no_caregiver", "care_constraint:lives_alone", "care_constraint:mobility", "enhanced_pathway:CASE-002", "admission:CASE-004", "admission:CASE-002", "med_change:CASE-004:furosemide"], "cross_session": true}`
 
-`    4621ms` ← `intake` done in 4252.2ms — `{"risk_tier": "high", "notes_quarantined": 5, "notes_flagged": 1, "memories_recalled": 8}`
+`    3962ms` ← `intake` done in 3645.5ms — `{"risk_tier": "high", "notes_quarantined": 5, "notes_flagged": 1, "memories_recalled": 8}`
 
 
-### `    4622ms` → node `supervisor`
+### `    3964ms` → node `supervisor`
 
-`    8054ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
+`    7365ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
 
-`    8054ms` **SUPERVISOR** dispatches to **`medication`**  
-    _Medication reconciliation is clinically urgent for high-readmission-risk acute decompensated heart failure and is a prerequisite for scheduling follow-up and generating patient education._
+`    7365ms` **SUPERVISOR** dispatches to **`medication`**  
+    _Medication reconciliation is prioritized due to the high readmission risk associated with recurrent acute decompensated heart failure and because it is a required prerequisite for scheduling follow-up and drafting patient education._
 
-`    8055ms` ← `supervisor` done in 3432.4ms — `{"next_agent": "medication", "step": 1}`
+`    7365ms` ← `supervisor` done in 3401.8ms — `{"next_agent": "medication", "step": 1}`
 
-`    8056ms` **ROUTE** `route_from_supervisor` → **`medication`**  
+`    7366ms` **ROUTE** `route_from_supervisor` → **`medication`**  
     _supervisor selected 'medication'_
 
 
-### `    8057ms` → node `medication`
+### `    7367ms` → node `medication`
 
-`   11670ms` **TOOL** `medication_interaction_check` (mcp, ok)  
+`   11180ms` **TOOL** `medication_interaction_check` (mcp, ok)  
     args: `{"medications": ["Furosemide", "Metoprolol succinate", "Apixaban", "Metformin", "Sacubitril-valsartan", "Spironolactone"]}`  
     result: `{
   "medications_checked": [
@@ -59,124 +59,126 @@ The supervisor plans, dispatches to specialist workers, and every artifact passe
       "drug_a": "furosemide",
       "dru`
 
-`   25856ms` **REACT_COMPLETE** `{"worker": "medication", "iterations": 2, "reason": "model_stopped_calling_tools"}`
+`   36584ms` **REACT_COMPLETE** `{"worker": "medication", "iterations": 2, "reason": "model_stopped_calling_tools"}`
 
-`   48034ms` **STRUCTURED_OUTPUT** `{"node": "medication", "schema": "MedicationReconciliation", "schema_valid": true, "error": ""}`
+`   54576ms` **STRUCTURED_OUTPUT** `{"node": "medication", "schema": "MedicationReconciliation", "schema_valid": true, "error": ""}`
 
-`   48034ms` ← `medication` done in 39977.1ms — `{"ok": true, "worker": "medication", "schema": "MedicationReconciliation"}`
+`   54577ms` ← `medication` done in 47210.1ms — `{"ok": true, "worker": "medication", "schema": "MedicationReconciliation"}`
 
-`   48036ms` **ROUTE** `route_after_medication` → **`pharmacist_review`**  
+`   54578ms` **ROUTE** `route_after_medication` → **`pharmacist_review`**  
     _highest interaction severity=moderate; pharmacist_required=True_
 
 
-### `   48040ms` → node `pharmacist_review`
+### `   54579ms` → node `pharmacist_review`
 
-`   48041ms` **HUMAN_IN_THE_LOOP** `{"node": "pharmacist_review", "interactions": 4, "serious": 0, "detail": "flagged by reconciliation", "note": "Graph interrupted here; state checkpointed for pharmacist sign-off."}`
+`   54580ms` **HUMAN_IN_THE_LOOP** `{"node": "pharmacist_review", "interactions": 4, "serious": 0, "detail": "flagged by reconciliation", "note": "Graph interrupted here; state checkpointed for pharmacist sign-off."}`
 
-`   48042ms` ← `pharmacist_review` done in 2.2ms — `{"serious_interactions": 0}`
+`   54580ms` ← `pharmacist_review` done in 1.1ms — `{"serious_interactions": 0}`
 
 
-### `   48043ms` → node `reflect`
+### `   54582ms` → node `reflect`
 
-`   52359ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
+`   60117ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
 
-`   52360ms` **CRITIC** `medication` confidence **0.95** → **ACCEPT**
+`   60117ms` **CRITIC** `medication` confidence **0.95** → **ACCEPT**
 
-`   52360ms` ← `reflect` done in 4317.0ms — `{"action": "accept", "confidence": 0.95}`
+`   60118ms` ← `reflect` done in 5536.0ms — `{"action": "accept", "confidence": 0.95}`
 
-`   52360ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
+`   60118ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
     _critic accepted or escalated; returning to supervisor_
 
 
-### `   52362ms` → node `supervisor`
+### `   60119ms` → node `supervisor`
 
-`   56781ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
+`   64854ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
 
-`   56781ms` **SUPERVISOR** dispatches to **`followup`**  
-    _Medication reconciliation is complete, unlocking the follow-up workstream. Scheduling follow-up appointments and home care services is prioritized due to the patient's high readmission risk for recurrent heart failure._
+`   64855ms` **SUPERVISOR** dispatches to **`followup`**  
+    _Medication reconciliation is complete, unlocking follow-up. With high readmission risk in acute decompensated heart failure, coordinating timely follow-up appointments and home services takes clinical priority._
 
-`   56782ms` ← `supervisor` done in 4420.1ms — `{"next_agent": "followup", "step": 2}`
+`   64855ms` ← `supervisor` done in 4736.1ms — `{"next_agent": "followup", "step": 2}`
 
-`   56782ms` **ROUTE** `route_from_supervisor` → **`followup`**  
+`   64856ms` **ROUTE** `route_from_supervisor` → **`followup`**  
     _supervisor selected 'followup'_
 
 
-### `   56783ms` → node `followup`
+### `   64857ms` → node `followup`
 
-`   62670ms` **TOOL** `schedule_followup` (mcp, ok)  
-    args: `{"within_days": 7, "specialty": "Cardiology", "mrn": "CASE-002", "reason": "Heart failure follow-up, sacubitril-valsartan uptitration, spironolactone start, diuretic adjustment, renal/potassium lab ch`  
+`   72939ms` **TOOL** `schedule_followup` (mcp, ok)  
+    args: `{"mrn": "CASE-002", "specialty": "Cardiology", "reason": "Recurrent acute decompensated heart failure follow-up, monitoring after sacubitril-valsartan uptitration, spironolactone initiation, furosemid`  
     result: `{
   "confirmed": true,
-  "confirmation_id": "FU-CASE-002-CAR-0919",
+  "confirmation_id": "FU-CASE-002-CAR-0920",
   "mrn": "CASE-002",
   "specialty": "Cardiology",
-  "scheduled_date": "2026-09-19",
+  "scheduled_date": "2026-09-20",
   "days_from_discharge": 7,
   "requested_within_days": 7,
   "within_requested_window": true,
-  "reason": "Heart failure follow-u`
+  "reason": "Recurrent acute decomp`
 
-`   63944ms` **TOOL** `check_transport_availability` (mcp, ok)  
-    args: `{"mrn": "CASE-002", "transport_type": "wheelchair_van"}`  
-    result: `{
-  "available": false,
-  "mrn": "CASE-002",
-  "transport_type": "wheelchair_van",
-  "date": "2026-09-12",
-  "slots_remaining": 0,
-  "daily_capacity": 12,
-  "lead_time_hours": 12,
-  "cost_band": "medium",
-  "note": "Fully booked on 2026-09-12. Try taxi_voucher (2h lead time) or m`
-
-`   64975ms` **TOOL** `check_transport_availability` (mcp, ok)  
-    args: `{"mrn": "CASE-002", "transport_type": "taxi_voucher"}`  
+`   73135ms` **TOOL** `check_transport_availability` (mcp, ok)  
+    args: `{"transport_type": "wheelchair_van", "mrn": "CASE-002"}`  
     result: `{
   "available": true,
   "mrn": "CASE-002",
-  "transport_type": "taxi_voucher",
-  "date": "2026-09-12",
-  "slots_remaining": 19,
-  "daily_capacity": 20,
-  "lead_time_hours": 2,
-  "cost_band": "low",
-  "note": "19 slot(s) remaining. Book at least 2h ahead."
+  "transport_type": "wheelchair_van",
+  "date": "2026-09-13",
+  "slots_remaining": 12,
+  "daily_capacity": 12,
+  "lead_time_hours": 12,
+  "cost_band": "medium",
+  "note": "12 slot(s) remaining. Book at least 12h ahead."
 }`
 
-`   70936ms` **REACT_COMPLETE** `{"worker": "followup", "iterations": 4, "reason": "model_stopped_calling_tools"}`
+`   74869ms` **TOOL** `schedule_followup` (mcp, ok)  
+    args: `{"reason": "Routine primary care discharge follow-up, chronic disease management (T2DM, CKD 3a), and lab monitoring review.", "within_days": 14, "mrn": "CASE-002", "specialty": "Primary Care"}`  
+    result: `{
+  "confirmed": true,
+  "confirmation_id": "FU-CASE-002-PRI-0927",
+  "mrn": "CASE-002",
+  "specialty": "Primary Care",
+  "scheduled_date": "2026-09-27",
+  "days_from_discharge": 14,
+  "requested_within_days": 14,
+  "within_requested_window": true,
+  "reason": "Routine primary ca`
 
-`   74428ms` **STRUCTURED_OUTPUT** `{"node": "followup", "schema": "FollowUpPlan", "schema_valid": true, "error": ""}`
+`   81084ms` **REACT_COMPLETE** `{"worker": "followup", "iterations": 3, "reason": "model_stopped_calling_tools"}`
 
-`   74434ms` ← `followup` done in 17650.3ms — `{"ok": true, "worker": "followup", "schema": "FollowUpPlan"}`
+`   89625ms` **STRUCTURED_OUTPUT** `{"node": "followup", "schema": "FollowUpPlan", "schema_valid": true, "error": ""}`
 
-`   74436ms` **ROUTE** `route_risk_tier` → **`enhanced_followup`**  
+`   89626ms` ← `followup` done in 24768.8ms — `{"ok": true, "worker": "followup", "schema": "FollowUpPlan"}`
+
+`   89626ms` **ROUTE** `route_risk_tier` → **`enhanced_followup`**  
     _readmission risk tier=high (score 1.00)_
 
 
-### `   74437ms` → node `enhanced_followup`
+### `   89628ms` → node `enhanced_followup`
 
-`   74438ms` **ENHANCED_PATHWAY_APPLIED** `{"risk_tier": "high", "risk_score": 1.0, "services_added": ["48-72 hour post-discharge telephone check", "home health nursing assessment within 5 days", "pharmacist medication review call within 7 days"]}`
+`   89629ms` **ENHANCED_PATHWAY_APPLIED** `{"risk_tier": "high", "risk_score": 1.0, "services_added": ["48-72 hour post-discharge telephone check", "home health nursing assessment within 5 days", "pharmacist medication review call within 7 days"]}`
 
-`   74439ms` ← `enhanced_followup` done in 1.7ms — `{"services_added": 3}`
-
-
-### `   74440ms` → node `reflect`
-
-`   82226ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
-
-`   82227ms` **CRITIC** `followup` confidence **0.65** → **REVISE**
-    - The scheduled appointment date of 2026-09-19 is 11 days post-discharge (discharge date 2026-09-08), which contradicts the specified within_days value of 7 and the narrative note stating cardiology follow-up is scheduled for 7 days post-discharge (which corresponds to 2026-09-15).
-
-`   82228ms` ← `reflect` done in 7787.5ms — `{"action": "revise", "confidence": 0.65}`
-
-`   82228ms` **ROUTE** `route_after_reflection` → **`followup`**  
-    _critic requested revision of 'followup': 1 issue(s)_
+`   89629ms` ← `enhanced_followup` done in 1.2ms — `{"services_added": 3}`
 
 
-### `   82229ms` → node `followup`
+### `   89630ms` → node `reflect`
 
-`   86546ms` **TOOL** `schedule_followup` (mcp, ok)  
-    args: `{"specialty": "Cardiology", "mrn": "CASE-002", "discharge_date": "2026-09-08", "reason": "Recurrent ADHF, uptitrated Entresto and new Spironolactone, furosemide increase - monitor renal function, pota`  
+`   97922ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
+
+`   97923ms` **CRITIC** `followup` confidence **0.50** → **REVISE**
+    - transport_arranged is set to True and notes state 'confirmed wheelchair van transport', contradicting nurse_handoff-00 which explicitly notes 'no transport arrangements in place'.
+    - Cardiology appointment scheduled_date (2026-09-20) is 12 days post-discharge (discharge date 2026-09-08), contradicting within_days: 7.
+    - Primary Care appointment scheduled_date (2026-09-27) is 19 days post-discharge (discharge date 2026-09-08), contradicting within_days: 14.
+
+`   97923ms` ← `reflect` done in 8293.5ms — `{"action": "revise", "confidence": 0.5}`
+
+`   97924ms` **ROUTE** `route_after_reflection` → **`followup`**  
+    _critic requested revision of 'followup': 3 issue(s)_
+
+
+### `   97926ms` → node `followup`
+
+`  104175ms` **TOOL** `schedule_followup` (mcp, ok)  
+    args: `{"reason": "Post-HF exacerbation follow-up, BMP/potassium/renal function check following spironolactone initiation and furosemide dose increase, sacubitril-valsartan uptitration.", "mrn": "CASE-002", `  
     result: `{
   "confirmed": true,
   "confirmation_id": "FU-CASE-002-CAR-0915",
@@ -186,10 +188,23 @@ The supervisor plans, dispatches to specialist workers, and every artifact passe
   "days_from_discharge": 7,
   "requested_within_days": 7,
   "within_requested_window": true,
-  "reason": "Recurrent ADHF, uptitr`
+  "reason": "Post-HF exacerbation f`
 
-`   88056ms` **TOOL** `check_transport_availability` (mcp, ok)  
-    args: `{"transport_type": "wheelchair_van", "discharge_date": "2026-09-08", "mrn": "CASE-002"}`  
+`  104372ms` **TOOL** `schedule_followup` (mcp, ok)  
+    args: `{"discharge_date": "2026-09-08", "within_days": 14, "reason": "Routine post-discharge follow-up and chronic disease management (CKD stage 3a, T2DM).", "specialty": "Primary Care", "mrn": "CASE-002"}`  
+    result: `{
+  "confirmed": true,
+  "confirmation_id": "FU-CASE-002-PRI-0922",
+  "mrn": "CASE-002",
+  "specialty": "Primary Care",
+  "scheduled_date": "2026-09-22",
+  "days_from_discharge": 14,
+  "requested_within_days": 14,
+  "within_requested_window": true,
+  "reason": "Routine post-disch`
+
+`  104582ms` **TOOL** `check_transport_availability` (mcp, ok)  
+    args: `{"transport_type": "wheelchair_van", "mrn": "CASE-002", "discharge_date": "2026-09-08"}`  
     result: `{
   "available": true,
   "mrn": "CASE-002",
@@ -202,177 +217,201 @@ The supervisor plans, dispatches to specialist workers, and every artifact passe
   "note": "3 slot(s) remaining. Book at least 12h ahead."
 }`
 
-`   89967ms` **TOOL** `schedule_followup` (mcp, ok)  
-    args: `{"mrn": "CASE-002", "specialty": "Primary Care", "within_days": 14, "reason": "Routine post-discharge monitoring, diabetes management, renal function check.", "discharge_date": "2026-09-08"}`  
-    result: `{
-  "confirmed": true,
-  "confirmation_id": "FU-CASE-002-PRI-0922",
-  "mrn": "CASE-002",
-  "specialty": "Primary Care",
-  "scheduled_date": "2026-09-22",
-  "days_from_discharge": 14,
-  "requested_within_days": 14,
-  "within_requested_window": true,
-  "reason": "Routine post-disch`
+`  116214ms` **REACT_COMPLETE** `{"worker": "followup", "iterations": 2, "reason": "model_stopped_calling_tools"}`
 
-`   91846ms` **AGENTIC RAG** the agent chose to look up:  
-    _"heart failure enhanced high risk discharge follow up pathway protocol"_ → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md', 'followup_scheduling_standards.md']
+`  123601ms` **STRUCTURED_OUTPUT** `{"node": "followup", "schema": "FollowUpPlan", "schema_valid": true, "error": ""}`
 
-`   91846ms` **TOOL** `search_clinical_guidance` (local, ok)  
-    args: `{"query": "heart failure enhanced high risk discharge follow up pathway protocol", "k": 3}`  
-    result: `['Heart Failure Discharge Protocol', 'Pre-discharge requirements', 'High-risk enhanced pathway']`
+`  123602ms` ← `followup` done in 25676.0ms — `{"ok": true, "worker": "followup", "schema": "FollowUpPlan"}`
 
-`  101882ms` **STRUCTURED_OUTPUT** `{"node": "followup", "schema": "FollowUpPlan", "schema_valid": true, "error": ""}`
-
-`  101883ms` ← `followup` done in 19654.2ms — `{"ok": true, "worker": "followup", "schema": "FollowUpPlan"}`
-
-`  101885ms` **ROUTE** `route_risk_tier` → **`enhanced_followup`**  
+`  123602ms` **ROUTE** `route_risk_tier` → **`enhanced_followup`**  
     _readmission risk tier=high (score 1.00)_
 
 
-### `  101887ms` → node `enhanced_followup`
+### `  123604ms` → node `enhanced_followup`
 
-`  101888ms` **ENHANCED_PATHWAY_APPLIED** `{"risk_tier": "high", "risk_score": 1.0, "services_added": ["48-72 hour post-discharge telephone check", "home health nursing assessment within 5 days", "pharmacist medication review call within 7 days"]}`
+`  123604ms` **ENHANCED_PATHWAY_APPLIED** `{"risk_tier": "high", "risk_score": 1.0, "services_added": ["48-72 hour post-discharge telephone check", "home health nursing assessment within 5 days", "pharmacist medication review call within 7 days"]}`
 
-`  101889ms` ← `enhanced_followup` done in 2.1ms — `{"services_added": 3}`
+`  123604ms` ← `enhanced_followup` done in 1.0ms — `{"services_added": 3}`
 
 
-### `  101890ms` → node `reflect`
+### `  123605ms` → node `reflect`
 
-`  112133ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
+`  129777ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
 
-`  112133ms` **CRITIC** `followup` confidence **0.90** → **ACCEPT**
+`  129778ms` **CRITIC** `followup` confidence **0.95** → **ACCEPT**
 
-`  112134ms` ← `reflect` done in 10243.4ms — `{"action": "accept", "confidence": 0.9}`
+`  129778ms` ← `reflect` done in 6172.9ms — `{"action": "accept", "confidence": 0.95}`
 
-`  112134ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
+`  129779ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
     _critic accepted or escalated; returning to supervisor_
 
 
-### `  112136ms` → node `supervisor`
+### `  129780ms` → node `supervisor`
 
-`  116635ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
+`  137500ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
 
-`  116636ms` **SUPERVISOR** dispatches to **`summary`**  
+`  137500ms` **SUPERVISOR** dispatches to **`summary`**  
     _Deterministic dependency order applied (model unavailable or unusable)._
 
-`  116636ms` ← `supervisor` done in 4500.5ms — `{"next_agent": "summary", "step": 3}`
+`  137500ms` ← `supervisor` done in 7720.8ms — `{"next_agent": "summary", "step": 3}`
 
-`  116637ms` **ROUTE** `route_from_supervisor` → **`summary`**  
+`  137501ms` **ROUTE** `route_from_supervisor` → **`summary`**  
     _supervisor selected 'summary'_
 
 
-### `  116639ms` → node `summary`
+### `  137502ms` → node `summary`
 
-`  122263ms` **AGENTIC RAG** the agent chose to look up:  
-    _"heart failure discharge follow up protocol requirements"_ → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md', 'hf_discharge_protocol.md']
+`  142584ms` **AGENTIC RAG** the agent chose to look up:  
+    _"heart failure discharge follow up BMP mineralocorticoid receptor antagonist"_ → ['hf_discharge_protocol.md', 'nsaid_renal_cardiac_risk.md', 'hf_discharge_protocol.md']
 
-`  122264ms` **TOOL** `search_clinical_guidance` (local, ok)  
-    args: `{"query": "heart failure discharge follow up protocol requirements", "k": 3}`  
-    result: `['Pre-discharge requirements', 'Heart Failure Discharge Protocol', 'Follow-up intervals']`
+`  142584ms` **TOOL** `search_clinical_guidance` (local, ok)  
+    args: `{"query": "heart failure discharge follow up BMP mineralocorticoid receptor antagonist", "k": 3}`  
+    result: `['Pre-discharge requirements', 'Why NSAIDs matter at discharge', 'Heart Failure Discharge Protocol']`
 
-`  135206ms` **REACT_COMPLETE** `{"worker": "summary", "iterations": 2, "reason": "model_stopped_calling_tools"}`
+`  166916ms` **REACT_COMPLETE** `{"worker": "summary", "iterations": 2, "reason": "model_stopped_calling_tools"}`
 
-`  149333ms` **STRUCTURED_OUTPUT** `{"node": "summary", "schema": "DischargeSummary", "schema_valid": true, "error": ""}`
+`  184376ms` **STRUCTURED_OUTPUT** `{"node": "summary", "schema": "DischargeSummary", "schema_valid": true, "error": ""}`
 
-`  149334ms` ← `summary` done in 32694.8ms — `{"ok": true, "worker": "summary", "schema": "DischargeSummary"}`
+`  184377ms` ← `summary` done in 46874.6ms — `{"ok": true, "worker": "summary", "schema": "DischargeSummary"}`
 
 
-### `  149338ms` → node `reflect`
+### `  184378ms` → node `reflect`
 
-`  154880ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
+`  192520ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
 
-`  154880ms` **CRITIC** `summary` confidence **0.60** → **REVISE**
-    - The hospital course describes the patient as having 'HFrEF (EF 30 percent)', but specific ejection fraction or heart failure classification is not documented in the source context or clinical notes.
+`  192520ms` **CRITIC** `summary` confidence **0.65** → **REVISE**
+    - Secondary diagnoses includes 'Heart failure with reduced ejection fraction (EF 30%)' which is not documented in the source context or clinical notes.
 
-`  154881ms` ← `reflect` done in 5542.6ms — `{"action": "revise", "confidence": 0.6}`
+`  192520ms` ← `reflect` done in 8142.3ms — `{"action": "revise", "confidence": 0.65}`
 
-`  154882ms` **ROUTE** `route_after_reflection` → **`summary`**  
+`  192521ms` **ROUTE** `route_after_reflection` → **`summary`**  
     _critic requested revision of 'summary': 1 issue(s)_
 
 
-### `  154883ms` → node `summary`
+### `  192522ms` → node `summary`
 
-`  171345ms` **REACT_COMPLETE** `{"worker": "summary", "iterations": 1, "reason": "model_stopped_calling_tools"}`
+`  200248ms` **TOOL** `patient_lookup` (mcp, ok)  
+    args: `{"mrn": "CASE-002"}`  
+    result: `{
+  "found": false,
+  "mrn": "CASE-002",
+  "error": "No patient found with MRN 'CASE-002'.",
+  "available_mrns": [
+    "mrn_f8e520f8e2",
+    "pii_67d374a7df",
+    "mrn_23f64473cf"
+  ]
+}`
 
-`  179048ms` **STRUCTURED_OUTPUT** `{"node": "summary", "schema": "DischargeSummary", "schema_valid": true, "error": ""}`
+`  211633ms` **REACT_COMPLETE** `{"worker": "summary", "iterations": 2, "reason": "model_stopped_calling_tools"}`
 
-`  179049ms` ← `summary` done in 24166.4ms — `{"ok": true, "worker": "summary", "schema": "DischargeSummary"}`
+`  224747ms` **STRUCTURED_OUTPUT** `{"node": "summary", "schema": "DischargeSummary", "schema_valid": true, "error": ""}`
+
+`  224748ms` ← `summary` done in 32225.8ms — `{"ok": true, "worker": "summary", "schema": "DischargeSummary"}`
 
 
-### `  179050ms` → node `reflect`
+### `  224749ms` → node `reflect`
 
-`  184042ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
+`  232125ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
 
-`  184043ms` **CRITIC** `summary` confidence **0.95** → **ACCEPT**
+`  232125ms` **CRITIC** `summary` confidence **0.95** → **ACCEPT**
 
-`  184043ms` ← `reflect` done in 4992.5ms — `{"action": "accept", "confidence": 0.95}`
+`  232126ms` ← `reflect` done in 7376.3ms — `{"action": "accept", "confidence": 0.95}`
 
-`  184044ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
+`  232126ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
     _critic accepted or escalated; returning to supervisor_
 
 
-### `  184044ms` → node `supervisor`
+### `  232127ms` → node `supervisor`
 
-`  189441ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
+`  238103ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
 
-`  189442ms` **SUPERVISOR** dispatches to **`education`**  
+`  238104ms` **SUPERVISOR** dispatches to **`education`**  
     _Deterministic dependency order applied (model unavailable or unusable)._
 
-`  189443ms` ← `supervisor` done in 5398.1ms — `{"next_agent": "education", "step": 4}`
+`  238104ms` ← `supervisor` done in 5977.5ms — `{"next_agent": "education", "step": 4}`
 
-`  189443ms` **ROUTE** `route_from_supervisor` → **`education`**  
+`  238105ms` **ROUTE** `route_from_supervisor` → **`education`**  
     _supervisor selected 'education'_
 
 
-### `  189444ms` → node `education`
+### `  238106ms` → node `education`
 
-`  192525ms` **AGENTIC RAG** the agent chose to look up:  
-    _"heart failure patient education daily weights red flags discharge guidance"_ → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md']
+`  240384ms` **AGENTIC RAG** the agent chose to look up:  
+    _"heart failure patient discharge education warning signs daily weights"_ → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md']
 
-`  192525ms` **TOOL** `search_clinical_guidance` (local, ok)  
-    args: `{"query": "heart failure patient education daily weights red flags discharge guidance", "k": 2}`  
-    result: `['Readmission risk', 'Weight monitoring']`
+`  240384ms` **TOOL** `search_clinical_guidance` (local, ok)  
+    args: `{"query": "heart failure patient discharge education warning signs daily weights", "k": 2}`  
+    result: `['Weight monitoring', 'Readmission risk']`
 
-`  202127ms` **REACT_COMPLETE** `{"worker": "education", "iterations": 2, "reason": "model_stopped_calling_tools"}`
+`  254905ms` **REACT_COMPLETE** `{"worker": "education", "iterations": 2, "reason": "model_stopped_calling_tools"}`
 
-`  210410ms` **STRUCTURED_OUTPUT** `{"node": "education", "schema": "EducationPacket", "schema_valid": true, "error": ""}`
+`  266034ms` **STRUCTURED_OUTPUT** `{"node": "education", "schema": "EducationPacket", "schema_valid": true, "error": ""}`
 
-`  210411ms` ← `education` done in 20966.2ms — `{"ok": true, "worker": "education", "schema": "EducationPacket"}`
+`  266035ms` ← `education` done in 27928.8ms — `{"ok": true, "worker": "education", "schema": "EducationPacket"}`
 
 
-### `  210412ms` → node `reflect`
+### `  266038ms` → node `reflect`
 
-`  278737ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
+`  278355ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
 
-`  278737ms` **CRITIC** `education` confidence **0.95** → **ACCEPT**
+`  278356ms` **CRITIC** `education` confidence **0.70** → **REVISE**
+    - The education instructions omit guidance on using the dosette box (pill organizer) arranged during admission, which was specifically implemented to address medication non-adherence (intermittent furosemide dosing) that contributed to her readmission.
 
-`  278737ms` ← `reflect` done in 68324.9ms — `{"action": "accept", "confidence": 0.95}`
+`  278356ms` ← `reflect` done in 12318.0ms — `{"action": "revise", "confidence": 0.7}`
 
-`  278738ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
+`  278358ms` **ROUTE** `route_after_reflection` → **`education`**  
+    _critic requested revision of 'education': 1 issue(s)_
+
+
+### `  278359ms` → node `education`
+
+`  280674ms` **AGENTIC RAG** the agent chose to look up:  
+    _"heart failure patient discharge education dosette box pill organizer weight monitoring red flags"_ → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md', 'hf_discharge_protocol.md']
+
+`  280674ms` **TOOL** `search_clinical_guidance` (local, ok)  
+    args: `{"query": "heart failure patient discharge education dosette box pill organizer weight monitoring red flags", "k": 3}`  
+    result: `['Weight monitoring', 'Readmission risk', 'Heart Failure Discharge Protocol']`
+
+`  292698ms` **REACT_COMPLETE** `{"worker": "education", "iterations": 2, "reason": "model_stopped_calling_tools"}`
+
+`  302074ms` **STRUCTURED_OUTPUT** `{"node": "education", "schema": "EducationPacket", "schema_valid": true, "error": ""}`
+
+`  302075ms` ← `education` done in 23716.0ms — `{"ok": true, "worker": "education", "schema": "EducationPacket"}`
+
+
+### `  302076ms` → node `reflect`
+
+`  310097ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
+
+`  310097ms` **CRITIC** `education` confidence **0.95** → **ACCEPT**
+
+`  310098ms` ← `reflect` done in 8021.5ms — `{"action": "accept", "confidence": 0.95}`
+
+`  310098ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
     _critic accepted or escalated; returning to supervisor_
 
 
-### `  278740ms` → node `supervisor`
+### `  310099ms` → node `supervisor`
 
-`  278742ms` **SUPERVISOR** dispatches to **`finalize`**  
+`  310100ms` **SUPERVISOR** dispatches to **`finalize`**  
     _all_complete_
 
-`  278742ms` ← `supervisor` done in 1.6ms — `{"next_agent": "finalize", "step": 5}`
+`  310100ms` ← `supervisor` done in 1.2ms — `{"next_agent": "finalize", "step": 5}`
 
-`  278742ms` **ROUTE** `route_from_supervisor` → **`finalize`**  
+`  310101ms` **ROUTE** `route_from_supervisor` → **`finalize`**  
     _supervisor selected 'finalize'_
 
 
-### `  278743ms` → node `finalize`
+### `  310102ms` → node `finalize`
 
-`  279259ms` **MEMORY_EVICTION** `{"namespace_hash": "pii_837946bfc9", "dry_run": false, "evaluated": 27, "kept": 27, "evicted": 0, "expired_by_ttl": 0, "evicted_by_capacity": 0, "permanent_retained": 7, "evicted_keys": []}`
+`  310542ms` **MEMORY_EVICTION** `{"namespace_hash": "pii_67d374a7df", "dry_run": false, "evaluated": 24, "kept": 24, "evicted": 0, "expired_by_ttl": 0, "evicted_by_capacity": 0, "permanent_retained": 7, "evicted_keys": []}`
 
-`  279259ms` **MEMORY_OP** `{"op": "write", "tier": "multi", "count": 14, "keys": ["allergy:penicillin", "care_constraint:no_caregiver", "care_constraint:lives_alone", "care_constraint:mobility", "risk_tier", "admission:CASE-004", "med_change:CASE-004:furosemide", "med_change:CASE-004:sacubitril-valsartan", "med_change:CASE-004:spironolactone", "followup:CASE-004:cardiology", "followup:CASE-004:nursing (telephone check)", "f`
+`  310542ms` **MEMORY_OP** `{"op": "write", "tier": "multi", "count": 13, "keys": ["allergy:penicillin", "care_constraint:no_caregiver", "care_constraint:lives_alone", "care_constraint:mobility", "risk_tier", "admission:CASE-004", "med_change:CASE-004:furosemide", "med_change:CASE-004:sacubitril-valsartan", "med_change:CASE-004:spironolactone", "followup:CASE-004:cardiology", "followup:CASE-004:primary care", "enhanced_pathw`
 
-`  279259ms` **PACKET_FINALIZED** `{"completeness": 1.0, "escalations": 4, "quarantine_flags": 1, "workstreams_completed": ["medication", "followup", "summary", "education"]}`
+`  310543ms` **PACKET_FINALIZED** `{"completeness": 1.0, "escalations": 4, "quarantine_flags": 1, "workstreams_completed": ["medication", "followup", "summary", "education"]}`
 
-`  279259ms` ← `finalize` done in 516.1ms — `{"completeness": 1.0}`
+`  310543ms` ← `finalize` done in 441.1ms — `{"completeness": 1.0}`
 
 
 ---
@@ -381,17 +420,17 @@ The supervisor plans, dispatches to specialist workers, and every artifact passe
 
 | event | count |
 |---|---|
-| `token_usage` | 31 |
-| `node_enter` | 22 |
-| `node_exit` | 22 |
-| `structured_output` | 16 |
-| `routing_decision` | 14 |
-| `tool_call` | 10 |
-| `worker_context` | 6 |
-| `worker_output` | 6 |
-| `reflection` | 6 |
+| `token_usage` | 33 |
+| `node_enter` | 24 |
+| `node_exit` | 24 |
+| `structured_output` | 18 |
+| `routing_decision` | 15 |
+| `tool_call` | 11 |
+| `worker_context` | 7 |
+| `react_complete` | 7 |
+| `worker_output` | 7 |
+| `reflection` | 7 |
 | `supervisor_decision` | 5 |
-| `react_complete` | 5 |
 | `rag_query` | 3 |
 | `memory_op` | 2 |
 | `enhanced_pathway_applied` | 2 |
@@ -403,8 +442,6 @@ The supervisor plans, dispatches to specialist workers, and every artifact passe
 | `quarantine_flag` | 1 |
 | `risk_assessment` | 1 |
 | `human_in_the_loop` | 1 |
-| `react_budget_exhausted` | 1 |
-| `llm_retry` | 1 |
 | `memory_eviction` | 1 |
 | `packet_finalized` | 1 |
 | `run_complete` | 1 |

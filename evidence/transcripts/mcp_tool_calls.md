@@ -1,7 +1,7 @@
 # MCP Tool-Call Transcript
 
 **Criteria:** AC-10 (adapter integration + tool-call log)  
-**Generated:** 2026-09-12T23:18:42+00:00  
+**Generated:** 2026-09-13T05:18:03+00:00  
 **Regenerate:** `python scripts/generate_evidence.py`
 
 > All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).
@@ -21,7 +21,7 @@ _Verify the record and confirm documented allergies before reconciling._
 }
 ```
 
-**Result** (228.2 ms)
+**Result** (231.1 ms)
 ```json
 {
   "found": true,
@@ -73,7 +73,7 @@ _CASE-003 discharge list — expected to surface a contraindicated pair._
 }
 ```
 
-**Result** (270.4 ms)
+**Result** (236.3 ms)
 ```json
 {
   "medications_checked": [
@@ -139,7 +139,7 @@ _CASE-002 pre-admission list — NSAID in heart failure._
 }
 ```
 
-**Result** (301.9 ms)
+**Result** (238.2 ms)
 ```json
 {
   "medications_checked": [
@@ -205,7 +205,7 @@ _Compressed window driven by the interaction finding._
 }
 ```
 
-**Result** (248.3 ms)
+**Result** (242.3 ms)
 ```json
 {
   "confirmed": true,
@@ -239,7 +239,7 @@ _No slot fits — the tool must say so rather than book outside the window._
 }
 ```
 
-**Result** (224.7 ms)
+**Result** (231.9 ms)
 ```json
 {
   "confirmed": true,
@@ -271,7 +271,7 @@ _CASE-002 patient has limited mobility and no caregiver._
 }
 ```
 
-**Result** (269.7 ms)
+**Result** (217.8 ms)
 ```json
 {
   "available": true,
@@ -362,7 +362,7 @@ _CASE-002 patient has limited mobility and no caregiver._
 
 ```json
 {
-  "generated": "2026-09-12T23:18:45",
+  "generated": "2026-09-13T05:18:06",
   "note": "SYNTHETIC formulary generated for this capstone. Not a clinical reference.",
   "medication_count": 14,
   "medications": [
