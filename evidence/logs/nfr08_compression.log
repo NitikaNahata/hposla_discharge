@@ -1,7 +1,7 @@
 # NFR-08 — Context-Window Management
 
 **Criteria:** NFR-08 (summarization / compression)  
-**Generated:** 2026-09-09T19:37:44+00:00  
+**Generated:** 2026-09-12T23:18:42+00:00  
 **Regenerate:** `python scripts/generate_evidence.py`
 
 > All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).

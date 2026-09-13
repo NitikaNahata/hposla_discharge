@@ -1,0 +1,187 @@
+{
+  "case_id": "CASE-002",
+  "patient_mrn": "MRN-2001",
+  "risk": {
+    "tier": "high",
+    "score": 1.0,
+    "factors": [
+      "readmitted within the last 12 months",
+      "5 or more discharge medications",
+      "lives alone with no in-home support",
+      "aged 75 or over",
+      "limited mobility",
+      "three or more active problems",
+      "diagnosis with a high 30-day readmission rate",
+      "no identified caregiver"
+    ],
+    "rationale": "Weighted heuristic over 8 of 9 tracked factors gives 1.00, placing this discharge in the high tier. Thresholds: high >= 0.55, moderate >= 0.3."
+  },
+  "summary": {
+    "primary_diagnosis": "Acute decompensated heart failure with reduced ejection fraction",
+    "secondary_diagnoses": [
+      "Chronic kidney disease stage 3a",
+      "Type 2 diabetes mellitus",
+      "Atrial fibrillation"
+    ],
+    "hospital_course": "A 79-year-old female with known heart failure with reduced ejection fraction was admitted with three days of increasing dyspnoea, orthopnoea, and a 4 kg weight gain. Physical examination showed elevated jugular venous pressure, bibasilar crackles, and bilateral pitting oedema to the mid-shin. Initial labs demonstrated a markedly elevated NT-proBNP. She was diuresed with intravenous furosemide, achieving a net negative fluid balance of 4.2 litres over five days, with complete resolution of symptoms and reaching her documented dry weight of 71.4 kg. During medication reconciliation, ibuprofen was identified as a contributor to decompensation and renal decline; it was discontinued and replaced with acetaminophen. Metformin dose was reduced in the setting of an eGFR of 44 mL/min/1.73m2. On day four, low-dose sacubitril-valsartan was initiated and well tolerated, with systolic blood pressure remaining above 105 mmHg. Creatinine stabilized at 1.4 mg/dL over the final 48 hours. A basic metabolic panel is required within 7 days post-discharge due to diuretic titration and sacubitril-valsartan initiation. Physiotherapy evaluated the patient and determined she requires a rolling walker for safe ambulation; on the day prior to discharge, she became short of breath after walking approximately 15 metres.",
+    "condition_at_discharge": "Heart failure symptoms resolved; at dry weight of 71.4 kg; blood pressure stable with SBP > 105 mmHg; renal function stable with creatinine 1.4 mg/dL over final 48 hours. Mobility requires a rolling walker, with dyspnea after walking 15 metres.",
+    "pending_results": [],
+    "disposition": "home"
+  },
+  "medications": {
+    "changes": [
+      {
+        "medication": "Furosemide",
+        "action": "modify",
+        "reason": "Dose increased for fluid management following acute heart failure decompensation.",
+        "prior_dose": "20 mg once daily",
+        "new_dose": "40 mg once daily"
+      },
+      {
+        "medication": "Metoprolol succinate",
+        "action": "continue",
+        "reason": "Continued unchanged from baseline.",
+        "prior_dose": "25 mg once daily",
+        "new_dose": "25 mg once daily"
+      },
+      {
+        "medication": "Apixaban",
+        "action": "continue",
+        "reason": "Continued unchanged from baseline.",
+        "prior_dose": "5 mg twice daily",
+        "new_dose": "5 mg twice daily"
+      },
+      {
+        "medication": "Metformin",
+        "action": "modify",
+        "reason": "Dose reduced in the context of impaired renal function (eGFR 44 mL/min/1.73m\u00b2).",
+        "prior_dose": "1000 mg twice daily",
+        "new_dose": "500 mg twice daily"
+      },
+      {
+        "medication": "Ibuprofen",
+        "action": "stop",
+        "reason": "Discontinued; identified as contributing to heart failure decompensation and renal function decline. Replaced with acetaminophen.",
+        "prior_dose": "400 mg as needed",
+        "new_dose": "None"
+      },
+      {
+        "medication": "Sacubitril-valsartan",
+        "action": "start",
+        "reason": "Initiated at low dose for HFrEF management.",
+        "prior_dose": "None",
+        "new_dose": "24/26 mg twice daily"
+      },
+      {
+        "medication": "Acetaminophen",
+        "action": "start",
+        "reason": "Initiated as safer PRN analgesic replacement for discontinued NSAID.",
+        "prior_dose": "None",
+        "new_dose": "650 mg as needed"
+      }
+    ],
+    "interactions": [
+      {
+        "drug_a": "furosemide",
+        "drug_b": "metformin",
+        "severity": "moderate",
+        "description": "Loop diuretics can reduce renal clearance of metformin and raise its plasma concentration.",
+        "recommendation": "Check renal function after any diuretic dose increase."
+      },
+      {
+        "drug_a": "metoprolol succinate",
+        "drug_b": "sacubitril-valsartan",
+        "severity": "moderate",
+        "description": "Additive hypotension, particularly during uptitration of either agent.",
+        "recommendation": "Uptitrate one agent at a time and monitor blood pressure and symptoms."
+      },
+      {
+        "drug_a": "metformin",
+        "drug_b": "sacubitril-valsartan",
+        "severity": "moderate",
+        "description": "Renin-angiotensin system blockade can reduce renal function, raising metformin accumulation and lactic-acidosis risk in chronic kidney disease.",
+        "recommendation": "Monitor renal function; reduce the metformin dose if eGFR falls below 45."
+      }
+    ],
+    "unreconciled": [],
+    "pharmacist_review_required": true,
+    "notes": "Reconciliation completed. Pre-admission ibuprofen discontinued due to HF decompensation and renal risk, replaced by acetaminophen. Metformin dose reduced for eGFR 44 mL/min/1.73m\u00b2. Diuretic increased and sacubitril-valsartan initiated. High-alert medications involved (apixaban, furosemide, metformin, sacubitril-valsartan). Patient requires repeat BMP within 7 days and reinforcement on diuretic dosing due to teach-back difficulty."
+  },
+  "followup": {
+    "appointments": [
+      {
+        "specialty": "Telephone Check",
+        "within_days": 3,
+        "reason": "48-72 hour post-discharge telephone check to evaluate fluid status, symptom recurrence, diuretic adherence, and reinforce teach-back.",
+        "scheduled_date": "2026-08-29",
+        "confirmed": true,
+        "modality": "phone"
+      },
+      {
+        "specialty": "Primary Care",
+        "within_days": 6,
+        "reason": "Primary care follow-up for ADHF/HFrEF, CKD3a, DM2, repeat BMP within 7 days for renal function and potassium monitoring after furosemide dose increase and sacubitril-valsartan initiation.",
+        "scheduled_date": "2026-09-01",
+        "confirmed": true,
+        "modality": "in_person"
+      },
+      {
+        "specialty": "Cardiology",
+        "within_days": 14,
+        "reason": "Cardiology follow-up for HFrEF management, volume status assessment, and GDMT uptitration as tolerated.",
+        "scheduled_date": "2026-09-09",
+        "confirmed": true,
+        "modality": "in_person"
+      }
+    ],
+    "enhanced_pathway": true,
+    "home_services": [
+      "Home health nursing for medication management, daily weight monitoring, symptom surveillance, and vital signs monitoring.",
+      "48-72 hour post-discharge telephone check",
+      "home health nursing assessment within 5 days",
+      "pharmacist medication review call within 7 days"
+    ],
+    "transport_arranged": false,
+    "notes": "High readmission-risk tier (1.00) triggers enhanced pathway with a 48-72 hour telephone call and Primary Care follow-up within 7 days (scheduled for 2026-09-01, day 6 post-discharge) to ensure repeat BMP monitoring following furosemide increase and sacubitril-valsartan start. Cardiology follow-up scheduled for 2026-09-09 (day 14). Home health nursing added due to patient living alone, limited mobility, complex regimen, and teach-back difficulty."
+  },
+  "education": {
+    "plain_language_summary": "You were in the hospital because your heart was having trouble pumping blood, which caused extra fluid to build up in your body. We adjusted your medications to help your heart pump better and to remove extra water. You will have a home health nurse visit you, phone calls to check on you, and follow-up doctor appointments.",
+    "medication_instructions": [
+      "Take Furosemide (water pill) 40 mg once daily in the morning. Your dose was increased from 20 mg to help remove extra fluid.",
+      "Take Sacubitril-valsartan 24/26 mg twice daily in the morning and evening. This is a new medicine to help your heart pump better.",
+      "Take Metformin 500 mg twice daily with meals. Your dose was lowered from 1000 mg twice daily to protect your kidneys.",
+      "Take Metoprolol succinate 25 mg once daily. Continue taking this as before to help your blood pressure and heart rate.",
+      "Take Apixaban 5 mg twice daily. Continue taking this blood thinner as before to prevent blood clots.",
+      "Take Acetaminophen 650 mg as needed for mild pain. This is a new pain medicine.",
+      "STOP taking Ibuprofen. Do not take ibuprofen because it can harm your kidneys and cause fluid buildup, making heart failure worse."
+    ],
+    "activity_and_diet": [
+      "You must use your rolling walker every time you get up and walk to keep you safe and prevent falls, as evaluated by physical therapy.",
+      "Weigh yourself every morning right after using the bathroom and before eating or drinking. Write down your weight every day.",
+      "Rest when you feel tired and take short breaks throughout the day.",
+      "Follow your doctor's instructions regarding daily fluid and salt limits."
+    ],
+    "red_flag_symptoms": [
+      "Weight gain of more than 3 pounds in 1 day or 5 pounds in 1 week.",
+      "New or worsening swelling in your ankles, feet, legs, or belly.",
+      "Trouble breathing when lying flat or needing extra pillows to sleep.",
+      "Feeling dizzy, lightheaded, faint, or unusually weak.",
+      "Chest pain, chest pressure, or severe sudden shortness of breath (call 911 immediately)."
+    ],
+    "caregiver_instructions": [
+      "The patient is a 79-year-old female who lives on her own.",
+      "Because she lives independently, home health nursing visits and phone check-ins are scheduled to support her at home.",
+      "Helpers should ensure she uses her rolling walker every time she stands or walks to prevent falls.",
+      "Helpers should assist her with daily morning weight checks and medication management.",
+      "Watch her closely for red-flag signs such as sudden weight gain or leg swelling, and help her contact her doctor right away if these occur."
+    ],
+    "language": "English"
+  },
+  "escalations": [
+    "PHARMACIST REVIEW REQUIRED: flagged by reconciliation. Discharge medications must not be dispensed until signed off.",
+    "Enhanced follow-up pathway applied (readmission risk high, score 1.00).",
+    "Enhanced follow-up pathway applied (readmission risk high, score 1.00)."
+  ],
+  "quarantine_flags": [],
+  "requires_human_approval": true
+}

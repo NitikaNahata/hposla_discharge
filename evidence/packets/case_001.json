@@ -1,0 +1,99 @@
+{
+  "case_id": "CASE-001",
+  "patient_mrn": "MRN-1001",
+  "risk": {
+    "tier": "low",
+    "score": 0.14,
+    "factors": [
+      "diagnosis with a high 30-day readmission rate"
+    ],
+    "rationale": "Weighted heuristic over 1 of 9 tracked factors gives 0.14, placing this discharge in the low tier. Thresholds: high >= 0.55, moderate >= 0.3."
+  },
+  "summary": {
+    "primary_diagnosis": "Community-acquired pneumonia, right lower lobe",
+    "secondary_diagnoses": [
+      "Essential hypertension"
+    ],
+    "hospital_course": "A 54-year-old male with a history of essential hypertension presented with a 4-day history of productive cough, subjective fevers, and right-sided pleuritic chest pain. Initial vital signs were T 38.6 C, HR 104, RR 22, and SpO2 92% on room air. Chest radiograph showed a right lower lobe consolidation. He was initiated on IV ceftriaxone and azithromycin and blood cultures were drawn. On hospital day 2, after becoming afebrile and showing clinical improvement, he was transitioned to oral amoxicillin-clavulanate. By discharge on hospital day 3, he remained afebrile, was tolerating a regular diet, ambulating independently, and maintaining oxygen saturation of 96% on room air at rest and with ambulation.",
+    "condition_at_discharge": "Stable. Afebrile, tolerating regular diet and oral medications, ambulating independently, oxygen saturation 96% on room air at rest and ambulation.",
+    "pending_results": [
+      "Blood cultures drawn on admission (2026-08-14): negative at 48 hours, final read pending at time of discharge."
+    ],
+    "disposition": "home"
+  },
+  "medications": {
+    "changes": [
+      {
+        "medication": "Lisinopril",
+        "action": "continue",
+        "reason": "Continued unchanged from pre-admission regimen for baseline indication.",
+        "prior_dose": "10 mg PO once daily",
+        "new_dose": "10 mg PO once daily"
+      },
+      {
+        "medication": "Amoxicillin-clavulanate",
+        "action": "start",
+        "reason": "Initiated at discharge as oral step-down antibiotic therapy for right lower lobe community-acquired pneumonia.",
+        "prior_dose": "",
+        "new_dose": "875 mg PO twice daily"
+      }
+    ],
+    "interactions": [],
+    "unreconciled": [],
+    "pharmacist_review_required": false,
+    "notes": "All pre-admission and discharge medications are fully reconciled. No interactions, high-alert medications, or documented allergy overlaps detected."
+  },
+  "followup": {
+    "appointments": [
+      {
+        "specialty": "Primary Care",
+        "within_days": 14,
+        "reason": "Clinical re-evaluation post-discharge for right lower lobe community-acquired pneumonia and oral antibiotic step-down monitoring.",
+        "scheduled_date": "",
+        "confirmed": false,
+        "modality": "in_person"
+      },
+      {
+        "specialty": "Radiology",
+        "within_days": 42,
+        "reason": "Follow-up chest radiograph at 6 weeks to confirm radiographic resolution of right lower lobe consolidation.",
+        "scheduled_date": "",
+        "confirmed": false,
+        "modality": "in_person"
+      }
+    ],
+    "enhanced_pathway": false,
+    "home_services": [],
+    "transport_arranged": false,
+    "notes": "Patient discharged on oral Amoxicillin-clavulanate step-down therapy for right lower lobe pneumonia. Readmission risk tier is low. Follow-up includes PCP evaluation within 14 days and repeat chest X-ray at 6 weeks."
+  },
+  "education": {
+    "plain_language_summary": "You were in the hospital because you had an infection in your right lung, called pneumonia. You are now well enough to go home to finish your recovery. You will need to take an antibiotic pill twice a day to clear the rest of the infection and keep taking your blood pressure pill once a day. You also need to see your primary care doctor within 14 days and get a repeat chest X-ray in 6 weeks to make sure your lung is completely healed.",
+    "medication_instructions": [
+      "Lisinopril 10 milligrams: Take 1 pill by mouth once every day for your blood pressure. Keep taking this medicine as you did before.",
+      "Amoxicillin-clavulanate 875 milligrams: Take 1 pill by mouth twice every day with food. This is a new antibiotic pill to kill the rest of the lung infection. Take all of this medicine until it is completely gone, even if you feel better."
+    ],
+    "activity_and_diet": [
+      "Get plenty of rest and sleep so your body can heal from the lung infection.",
+      "Drink plenty of water and clear fluids throughout the day unless your doctor tells you otherwise.",
+      "Avoid cigarette smoke, vaping, or dust that can irritate your lungs."
+    ],
+    "red_flag_symptoms": [
+      "Fever of 100.4 degrees Fahrenheit or higher, or severe chills and shaking",
+      "Shortness of breath, breathing fast, or trouble catching your breath while sitting still",
+      "Sharp chest pain when you take a deep breath or cough",
+      "Coughing up blood or thick dark green or yellow mucus",
+      "Feeling confused, unusually weak, or faint"
+    ],
+    "caregiver_instructions": [
+      "Help Denise Whitfield make sure all doses of the antibiotic pill amoxicillin-clavulanate are taken twice a day with food until the bottle is empty.",
+      "Help schedule the follow-up visit with the primary care doctor within 14 days.",
+      "Help schedule the chest X-ray appointment at the imaging center within 6 weeks (42 days) of leaving the hospital.",
+      "Watch for red flag symptoms like a fever over 100.4 degrees Fahrenheit, fast breathing, or chest pain, and call the doctor or go to the emergency room immediately if they happen."
+    ],
+    "language": "English"
+  },
+  "escalations": [],
+  "quarantine_flags": [],
+  "requires_human_approval": true
+}
