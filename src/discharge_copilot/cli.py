@@ -158,6 +158,17 @@ def _print_packet(packet: dict[str, Any]) -> None:
     )
 
 
+def _save_packet_json(case_id: str, packet: dict[str, Any]) -> None:
+    """Persist the finalized packet as plain JSON for downstream evaluation (DeepEval)."""
+    if not packet:
+        return
+    cfg = get_config()
+    packets_dir = cfg.evidence_dir / "packets"
+    packets_dir.mkdir(parents=True, exist_ok=True)
+    path = packets_dir / f"{case_id.lower().replace('-', '_')}.json"
+    path.write_text(json.dumps(packet, indent=2, default=str))
+
+
 # ---------------------------------------------------------------------------
 # Commands
 # ---------------------------------------------------------------------------
@@ -276,6 +287,7 @@ def run(
         counts=tracer.counts(),
         usage=tracer.usage_summary(),
     )
+    _save_packet_json(discharge_case.case_id, final.get("packet", {}))
     _print_packet(final.get("packet", {}))
     console.print(f"\n[dim]Trace: {tracer.path}[/dim]")
 
@@ -342,6 +354,7 @@ def resume(
         counts=tracer.counts(),
         usage=tracer.usage_summary(),
     )
+    _save_packet_json(case_id, final.get("packet", {}))
     _print_packet(final.get("packet", {}))
     console.print(f"\n[dim]Trace: {tracer.path}[/dim]")
 
