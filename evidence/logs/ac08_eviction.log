@@ -1,7 +1,7 @@
 # AC-08 — Memory Eviction / Importance Policy
 
 **Criteria:** AC-08 (eviction policy)  
-**Generated:** 2026-09-09T18:41:46+00:00  
+**Generated:** 2026-09-12T23:18:42+00:00  
 **Regenerate:** `python scripts/generate_evidence.py`
 
 > All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).
@@ -11,7 +11,8 @@
 Importance-weighted, with a TTL floor and a per-namespace cap:
 
 ```
-effective = base_importance × recency_decay(age) + access_boost(access_count)
+effective = base_importance × recency_decay(age)
+          + access_boost(access_count)
 ```
 
 Policy for this run: cap 6, TTL 30d, floor 0.25, permanent at or above 0.75.

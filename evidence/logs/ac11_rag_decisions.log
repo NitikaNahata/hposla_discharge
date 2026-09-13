@@ -1,7 +1,7 @@
 # AC-11 — Agentic RAG Invocation Decisions
 
 **Criteria:** AC-11 (agentic RAG)  
-**Generated:** 2026-09-09T19:37:44+00:00  
+**Generated:** 2026-09-12T23:18:42+00:00  
 **Regenerate:** `python scripts/generate_evidence.py`
 
 > All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).
@@ -12,65 +12,39 @@
 topology forces it to run; the model decides per case whether a lookup is warranted.
 That is the difference between retrieval *inside the loop* and a fixed step.
 
-Across the committed runs the agent issued **19** retrieval calls, all of its
+Across the committed runs the agent issued **4** retrieval calls, all of its
 own choosing, with queries it composed itself.
 
 | case | retrieval calls |
 |---|---|
-| `case_001` | 3 |
-| `case_002` | 8 |
-| `case_003` | 3 |
-| `case_004` | 5 |
+| `case_001` | 0 |
+| `case_002` | 0 |
+| `case_003` | 1 |
+| `case_004` | 3 |
 
 ## Queries the agent composed
 
 ### `case_001`
 
-- **"community acquired pneumonia follow-up timing discharge primary care"**  
-  → ['pneumonia_discharge_protocol.md', 'pneumonia_discharge_protocol.md', 'pneumonia_discharge_protocol.md'] _(top relevance 0.7161)_
-- **"community acquired pneumonia discharge follow up chest radiograph timing"**  
-  → ['pneumonia_discharge_protocol.md', 'pneumonia_discharge_protocol.md', 'pneumonia_discharge_protocol.md'] _(top relevance 0.7638)_
-- **"pneumonia discharge patient education red flags antibiotic guidance"**  
-  → ['pneumonia_discharge_protocol.md', 'pneumonia_discharge_protocol.md', 'pneumonia_discharge_protocol.md'] _(top relevance 0.6056)_
+_The agent declined to retrieve on this run — it judged the case data sufficient. A scheduled retrieval step could not do this._
+
 
 ### `case_002`
 
-- **"heart failure high risk discharge follow up timing enhanced pathway home health"**  
-  → ['followup_scheduling_standards.md', 'hf_discharge_protocol.md', 'hf_discharge_protocol.md'] _(top relevance 0.5198)_
-- **"heart failure discharge follow up enhanced pathway home health telephone check"**  
-  → ['followup_scheduling_standards.md', 'hf_discharge_protocol.md', 'hf_discharge_protocol.md'] _(top relevance 0.563)_
-- **"heart failure discharge required follow up and lab monitoring"**  
-  → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md', 'patient_education_principles.md'] _(top relevance 0.6149)_
-- **"heart failure patient education packet red flags daily weights discharge protocol"**  
-  → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md', 'hf_discharge_protocol.md'] _(top relevance 0.5446)_
-- **"patient education heart failure daily weight scale home health"**  
-  → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md', 'hf_discharge_protocol.md'] _(top relevance 0.6291)_
-- **"patient education packet discharge heart failure instructions template guidance"**  
-  → ['hf_discharge_protocol.md', 'patient_education_principles.md', 'patient_education_principles.md'] _(top relevance 0.611)_
-- **"patient education packet structure sections requirements"**  
-  → ['patient_education_principles.md', 'patient_education_principles.md', 'patient_education_principles.md'] _(top relevance 0.5169)_
-- **"Heart Failure Discharge Protocol patient education"**  
-  → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md', 'hf_discharge_protocol.md'] _(top relevance 0.5115)_
+_The agent declined to retrieve on this run — it judged the case data sufficient. A scheduled retrieval step could not do this._
+
 
 ### `case_003`
 
-- **"discharge follow up timeline for PE DVT warfarin fluconazole interaction high risk"**  
-  → ['anticoagulation_guidance.md', 'anticoagulation_guidance.md', 'pneumonia_discharge_protocol.md'] _(top relevance 0.7096)_
-- **"discharge summary guidelines requirements pending results disposition"**  
-  → ['pneumonia_discharge_protocol.md', 'followup_scheduling_standards.md', 'medication_reconciliation_standards.md'] _(top relevance 0.5583)_
-- **"patient education guidance warfarin bleeding red flags discharge"**  
-  → ['anticoagulation_guidance.md', 'patient_education_principles.md', 'anticoagulation_guidance.md'] _(top relevance 0.5237)_
+- **"discharge patient education packet format warfarin blood clot red flags"**  
+  → ['anticoagulation_guidance.md', 'anticoagulation_guidance.md', 'anticoagulation_guidance.md'] _(top relevance 0.494)_
 
 ### `case_004`
 
-- **"acute decompensated heart failure discharge follow-up protocol high risk"**  
-  → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md', 'hf_discharge_protocol.md'] _(top relevance 0.714)_
-- **"heart failure discharge follow up timeline spironolactone lab check"**  
-  → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md', 'hf_discharge_protocol.md'] _(top relevance 0.5334)_
-- **"heart failure discharge BMP monitoring spironolactone sacubitril valsartan"**  
-  → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md', 'hf_discharge_protocol.md'] _(top relevance 0.4357)_
-- **"discharge summary format heart failure required elements"**  
-  → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md', 'patient_education_principles.md'] _(top relevance 0.5992)_
-- **"heart failure patient education packet discharge instructions red flags"**  
-  → ['hf_discharge_protocol.md', 'patient_education_principles.md', 'patient_education_principles.md'] _(top relevance 0.5474)_
+- **"heart failure enhanced high risk discharge follow up pathway protocol"**  
+  → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md', 'followup_scheduling_standards.md'] _(top relevance 0.5424)_
+- **"heart failure discharge follow up protocol requirements"**  
+  → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md', 'hf_discharge_protocol.md'] _(top relevance 0.626)_
+- **"heart failure patient education daily weights red flags discharge guidance"**  
+  → ['hf_discharge_protocol.md', 'hf_discharge_protocol.md'] _(top relevance 0.591)_
 

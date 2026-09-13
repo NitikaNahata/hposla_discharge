@@ -1,7 +1,7 @@
 # MCP Server Inventory
 
 **Criteria:** AC-09 (>= 2 tools, >= 1 resource) · AC-10 (langchain-mcp-adapters)  
-**Generated:** 2026-09-09T18:41:46+00:00  
+**Generated:** 2026-09-12T23:18:42+00:00  
 **Regenerate:** `python scripts/generate_evidence.py`
 
 > All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).

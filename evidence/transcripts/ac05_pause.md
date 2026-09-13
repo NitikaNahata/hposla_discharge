@@ -1,7 +1,7 @@
 # AC-05 — Process 1: Pause at the Interrupt
 
 **Criteria:** AC-05 (deterministically scored)  
-**Generated:** 2026-09-09T19:37:44+00:00  
+**Generated:** 2026-09-12T23:18:42+00:00  
 **Regenerate:** `python scripts/generate_evidence.py`
 
 > All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).
@@ -24,9 +24,7 @@ $ python -m discharge_copilot run --case data/samples/case_003.json --pause-afte
 Discarded the existing checkpoint for CASE-003; starting fresh.
 ╭────────────────────────── Paused for human review ───────────────────────────╮
 │ Paused before: pharmacist_review                                             │
-│ State checkpointed to                                                        │
-│ /Users/nitikajain/Downloads/final_capstone/.state/checkpoints.sqlite under   │
-│ thread CASE-003.                                                             │
+│ State checkpointed to /app/.state/checkpoints.sqlite under thread CASE-003.  │
 │                                                                              │
 │ Resume in a NEW process with:                                                │
 │   python -m discharge_copilot resume --case-id CASE-003                      │

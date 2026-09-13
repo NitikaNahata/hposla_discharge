@@ -1,7 +1,7 @@
 # AC-07 — Cross-Session Memory Persistence
 
 **Criteria:** AC-07 (deterministically scored)  
-**Generated:** 2026-09-09T18:41:46+00:00  
+**Generated:** 2026-09-12T23:18:42+00:00  
 **Regenerate:** `python scripts/generate_evidence.py`
 
 > All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).
@@ -23,8 +23,9 @@ tests/test_ac07_cross_session_memory.py::test_ac07_session_two_writes_join_sessi
 tests/test_ac07_cross_session_memory.py::test_ac07_restating_a_fact_preserves_its_original_age PASSED [ 50%]
 tests/test_ac07_cross_session_memory.py::test_ac07_namespaces_isolate_patients PASSED [ 66%]
 tests/test_ac07_cross_session_memory.py::test_ac07_semantic_tier_also_persists_across_processes PASSED [ 83%]
-tests/test_ac07_cross_session_memory.py::test_ac07_tiered_facade_recalls_across_sessions PASSED [100%]
+tests/test_ac07_cross_session_memory.py::test_ac07_tiered_facade_recalls_across_sessions PASSED [100%]Running teardown with pytest sessionfinish...
 
-============================== 6 passed in 10.45s ==============================
+
+============================== 6 passed in 11.16s ==============================
 
 ```
