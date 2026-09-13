@@ -1,0 +1,586 @@
+[
+  {
+    "case_id": "CASE_004",
+    "evaluation_type": "agent_quality_and_alignment",
+    "workers": {
+      "medication": {
+        "tool_usage": {
+          "worker": "medication",
+          "score": 0.5,
+          "correct_tools": [
+            "medication_interaction_check"
+          ],
+          "unexpected_tools": [],
+          "missed_tools": [
+            "search_clinical_guidance"
+          ],
+          "rationale": "1/2 expected tools called; 0 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "medication",
+          "schema": "MedicationReconciliation",
+          "score": 1.0,
+          "issues": [],
+          "changes_count": 6,
+          "interactions_count": 4,
+          "has_pharmacist_review": true
+        },
+        "alignment": {
+          "worker": "medication",
+          "alignment_score": 0.5,
+          "tools_called": [
+            "medication_interaction_check"
+          ],
+          "expected_triggers": {
+            "medication_interaction_check": "when discharge meds exist",
+            "search_clinical_guidance": "when unsure about contraindication"
+          },
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      },
+      "followup": {
+        "tool_usage": {
+          "worker": "followup",
+          "score": 0.35,
+          "correct_tools": [
+            "schedule_followup"
+          ],
+          "unexpected_tools": [
+            "check_transport_availability"
+          ],
+          "missed_tools": [
+            "search_clinical_guidance"
+          ],
+          "rationale": "1/2 expected tools called; 1 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "followup",
+          "schema": "FollowUpPlan",
+          "score": 0.7,
+          "issues": [
+            "No appointments scheduled"
+          ],
+          "appointments_count": 0,
+          "enhanced_pathway": true,
+          "home_services_count": 3,
+          "risk_alignment": false
+        },
+        "alignment": {
+          "worker": "followup",
+          "alignment_score": 0.5,
+          "tools_called": [
+            "check_transport_availability",
+            "schedule_followup"
+          ],
+          "expected_triggers": {
+            "schedule_followup": "when appointment details needed",
+            "search_clinical_guidance": "for follow-up interval lookup"
+          },
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      },
+      "education": {
+        "tool_usage": {
+          "worker": "education",
+          "score": 0.0,
+          "correct_tools": [],
+          "unexpected_tools": [],
+          "missed_tools": [
+            "search_clinical_guidance"
+          ],
+          "rationale": "0/1 expected tools called; 0 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "education",
+          "schema": "EducationPacket",
+          "score": 1.0,
+          "issues": [],
+          "red_flags_count": 4,
+          "med_instructions_count": 7,
+          "language": "English",
+          "safety_critical_issue": false
+        },
+        "alignment": {
+          "worker": "education",
+          "alignment_score": 0.0,
+          "tools_called": [],
+          "expected_triggers": {
+            "search_clinical_guidance": "for patient-facing explanations"
+          },
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      },
+      "summary": {
+        "tool_usage": {
+          "worker": "summary",
+          "score": 1.0,
+          "correct_tools": [
+            "patient_lookup",
+            "search_clinical_guidance"
+          ],
+          "unexpected_tools": [],
+          "missed_tools": [],
+          "rationale": "2/2 expected tools called; 0 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "summary",
+          "schema": "DischargeSummary",
+          "score": 1.0,
+          "issues": [],
+          "diagnosis": "Acute decompensated heart failure, recurrent",
+          "has_hospital_course": true,
+          "disposition": "home",
+          "pending_results_count": 0
+        },
+        "alignment": {
+          "worker": "summary",
+          "alignment_score": 0.0,
+          "tools_called": [
+            "patient_lookup",
+            "search_clinical_guidance"
+          ],
+          "expected_triggers": {},
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      }
+    },
+    "overall_score": 0.55,
+    "grade": "D"
+  },
+  {
+    "case_id": "CASE_002",
+    "evaluation_type": "agent_quality_and_alignment",
+    "workers": {
+      "medication": {
+        "tool_usage": {
+          "worker": "medication",
+          "score": 0.5,
+          "correct_tools": [
+            "medication_interaction_check"
+          ],
+          "unexpected_tools": [],
+          "missed_tools": [
+            "search_clinical_guidance"
+          ],
+          "rationale": "1/2 expected tools called; 0 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "medication",
+          "schema": "MedicationReconciliation",
+          "score": 1.0,
+          "issues": [],
+          "changes_count": 7,
+          "interactions_count": 3,
+          "has_pharmacist_review": true
+        },
+        "alignment": {
+          "worker": "medication",
+          "alignment_score": 0.5,
+          "tools_called": [
+            "medication_interaction_check"
+          ],
+          "expected_triggers": {
+            "medication_interaction_check": "when discharge meds exist",
+            "search_clinical_guidance": "when unsure about contraindication"
+          },
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      },
+      "followup": {
+        "tool_usage": {
+          "worker": "followup",
+          "score": 0.35,
+          "correct_tools": [
+            "schedule_followup"
+          ],
+          "unexpected_tools": [
+            "check_transport_availability"
+          ],
+          "missed_tools": [
+            "search_clinical_guidance"
+          ],
+          "rationale": "1/2 expected tools called; 1 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "followup",
+          "schema": "FollowUpPlan",
+          "score": 1.0,
+          "issues": [],
+          "appointments_count": 2,
+          "enhanced_pathway": true,
+          "home_services_count": 4,
+          "risk_alignment": false
+        },
+        "alignment": {
+          "worker": "followup",
+          "alignment_score": 0.5,
+          "tools_called": [
+            "check_transport_availability",
+            "schedule_followup"
+          ],
+          "expected_triggers": {
+            "schedule_followup": "when appointment details needed",
+            "search_clinical_guidance": "for follow-up interval lookup"
+          },
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      },
+      "education": {
+        "tool_usage": {
+          "worker": "education",
+          "score": 0.0,
+          "correct_tools": [],
+          "unexpected_tools": [],
+          "missed_tools": [
+            "search_clinical_guidance"
+          ],
+          "rationale": "0/1 expected tools called; 0 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "education",
+          "schema": "EducationPacket",
+          "score": 1.0,
+          "issues": [],
+          "red_flags_count": 5,
+          "med_instructions_count": 7,
+          "language": "English",
+          "safety_critical_issue": false
+        },
+        "alignment": {
+          "worker": "education",
+          "alignment_score": 0.0,
+          "tools_called": [],
+          "expected_triggers": {
+            "search_clinical_guidance": "for patient-facing explanations"
+          },
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      },
+      "summary": {
+        "tool_usage": {
+          "worker": "summary",
+          "score": 1.0,
+          "correct_tools": [
+            "patient_lookup",
+            "search_clinical_guidance"
+          ],
+          "unexpected_tools": [],
+          "missed_tools": [],
+          "rationale": "2/2 expected tools called; 0 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "summary",
+          "schema": "DischargeSummary",
+          "score": 1.0,
+          "issues": [],
+          "diagnosis": "Acute decompensated heart failure with reduced ejection fraction",
+          "has_hospital_course": true,
+          "disposition": "home",
+          "pending_results_count": 0
+        },
+        "alignment": {
+          "worker": "summary",
+          "alignment_score": 0.0,
+          "tools_called": [
+            "patient_lookup",
+            "search_clinical_guidance"
+          ],
+          "expected_triggers": {},
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      }
+    },
+    "overall_score": 0.57,
+    "grade": "D"
+  },
+  {
+    "case_id": "CASE_001",
+    "evaluation_type": "agent_quality_and_alignment",
+    "workers": {
+      "medication": {
+        "tool_usage": {
+          "worker": "medication",
+          "score": 0.35,
+          "correct_tools": [
+            "medication_interaction_check"
+          ],
+          "unexpected_tools": [
+            "patient_lookup"
+          ],
+          "missed_tools": [
+            "search_clinical_guidance"
+          ],
+          "rationale": "1/2 expected tools called; 1 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "medication",
+          "schema": "MedicationReconciliation",
+          "score": 1.0,
+          "issues": [],
+          "changes_count": 2,
+          "interactions_count": 0,
+          "has_pharmacist_review": false
+        },
+        "alignment": {
+          "worker": "medication",
+          "alignment_score": 0.5,
+          "tools_called": [
+            "medication_interaction_check",
+            "patient_lookup"
+          ],
+          "expected_triggers": {
+            "medication_interaction_check": "when discharge meds exist",
+            "search_clinical_guidance": "when unsure about contraindication"
+          },
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      },
+      "followup": {
+        "tool_usage": {
+          "worker": "followup",
+          "score": 0.5,
+          "correct_tools": [
+            "schedule_followup"
+          ],
+          "unexpected_tools": [],
+          "missed_tools": [
+            "search_clinical_guidance"
+          ],
+          "rationale": "1/2 expected tools called; 0 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "followup",
+          "schema": "FollowUpPlan",
+          "score": 1.0,
+          "issues": [],
+          "appointments_count": 2,
+          "enhanced_pathway": false,
+          "home_services_count": 0,
+          "risk_alignment": false
+        },
+        "alignment": {
+          "worker": "followup",
+          "alignment_score": 0.5,
+          "tools_called": [
+            "schedule_followup"
+          ],
+          "expected_triggers": {
+            "schedule_followup": "when appointment details needed",
+            "search_clinical_guidance": "for follow-up interval lookup"
+          },
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      },
+      "education": {
+        "tool_usage": {
+          "worker": "education",
+          "score": 1.0,
+          "correct_tools": [
+            "search_clinical_guidance"
+          ],
+          "unexpected_tools": [],
+          "missed_tools": [],
+          "rationale": "1/1 expected tools called; 0 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "education",
+          "schema": "EducationPacket",
+          "score": 1.0,
+          "issues": [],
+          "red_flags_count": 5,
+          "med_instructions_count": 2,
+          "language": "English",
+          "safety_critical_issue": false
+        },
+        "alignment": {
+          "worker": "education",
+          "alignment_score": 1.0,
+          "tools_called": [
+            "search_clinical_guidance"
+          ],
+          "expected_triggers": {
+            "search_clinical_guidance": "for patient-facing explanations"
+          },
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      },
+      "summary": {
+        "tool_usage": {
+          "worker": "summary",
+          "score": 0.0,
+          "correct_tools": [],
+          "unexpected_tools": [],
+          "missed_tools": [
+            "patient_lookup",
+            "search_clinical_guidance"
+          ],
+          "rationale": "0/2 expected tools called; 0 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "summary",
+          "schema": "DischargeSummary",
+          "score": 1.0,
+          "issues": [],
+          "diagnosis": "Community-acquired pneumonia, right lower lobe",
+          "has_hospital_course": true,
+          "disposition": "home",
+          "pending_results_count": 1
+        },
+        "alignment": {
+          "worker": "summary",
+          "alignment_score": 0.0,
+          "tools_called": [],
+          "expected_triggers": {},
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      }
+    },
+    "overall_score": 0.65,
+    "grade": "D"
+  },
+  {
+    "case_id": "CASE_003",
+    "evaluation_type": "agent_quality_and_alignment",
+    "workers": {
+      "medication": {
+        "tool_usage": {
+          "worker": "medication",
+          "score": 0.5,
+          "correct_tools": [
+            "medication_interaction_check"
+          ],
+          "unexpected_tools": [],
+          "missed_tools": [
+            "search_clinical_guidance"
+          ],
+          "rationale": "1/2 expected tools called; 0 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "medication",
+          "schema": "MedicationReconciliation",
+          "score": 1.0,
+          "issues": [],
+          "changes_count": 5,
+          "interactions_count": 3,
+          "has_pharmacist_review": true
+        },
+        "alignment": {
+          "worker": "medication",
+          "alignment_score": 0.5,
+          "tools_called": [
+            "medication_interaction_check"
+          ],
+          "expected_triggers": {
+            "medication_interaction_check": "when discharge meds exist",
+            "search_clinical_guidance": "when unsure about contraindication"
+          },
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      },
+      "followup": {
+        "tool_usage": {
+          "worker": "followup",
+          "score": 1.0,
+          "correct_tools": [
+            "schedule_followup",
+            "search_clinical_guidance"
+          ],
+          "unexpected_tools": [],
+          "missed_tools": [],
+          "rationale": "2/2 expected tools called; 0 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "followup",
+          "schema": "FollowUpPlan",
+          "score": 1.0,
+          "issues": [],
+          "appointments_count": 2,
+          "enhanced_pathway": true,
+          "home_services_count": 4,
+          "risk_alignment": false
+        },
+        "alignment": {
+          "worker": "followup",
+          "alignment_score": 1.0,
+          "tools_called": [
+            "schedule_followup",
+            "search_clinical_guidance"
+          ],
+          "expected_triggers": {
+            "schedule_followup": "when appointment details needed",
+            "search_clinical_guidance": "for follow-up interval lookup"
+          },
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      },
+      "education": {
+        "tool_usage": {
+          "worker": "education",
+          "score": 1.0,
+          "correct_tools": [
+            "search_clinical_guidance"
+          ],
+          "unexpected_tools": [],
+          "missed_tools": [],
+          "rationale": "1/1 expected tools called; 0 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "education",
+          "schema": "EducationPacket",
+          "score": 1.0,
+          "issues": [],
+          "red_flags_count": 6,
+          "med_instructions_count": 6,
+          "language": "English",
+          "safety_critical_issue": false
+        },
+        "alignment": {
+          "worker": "education",
+          "alignment_score": 1.0,
+          "tools_called": [
+            "search_clinical_guidance"
+          ],
+          "expected_triggers": {
+            "search_clinical_guidance": "for patient-facing explanations"
+          },
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      },
+      "summary": {
+        "tool_usage": {
+          "worker": "summary",
+          "score": 1.0,
+          "correct_tools": [
+            "patient_lookup",
+            "search_clinical_guidance"
+          ],
+          "unexpected_tools": [],
+          "missed_tools": [],
+          "rationale": "2/2 expected tools called; 0 unexpected calls"
+        },
+        "answer_quality": {
+          "worker": "summary",
+          "schema": "DischargeSummary",
+          "score": 1.0,
+          "issues": [],
+          "diagnosis": "Deep vein thrombosis of the left lower extremity with pulmonary embolism",
+          "has_hospital_course": true,
+          "disposition": "home",
+          "pending_results_count": 0
+        },
+        "alignment": {
+          "worker": "summary",
+          "alignment_score": 0.0,
+          "tools_called": [
+            "patient_lookup",
+            "search_clinical_guidance"
+          ],
+          "expected_triggers": {},
+          "note": "Score 1.0 = all tools called are contextually appropriate"
+        }
+      }
+    },
+    "overall_score": 0.83,
+    "grade": "B"
+  }
+]

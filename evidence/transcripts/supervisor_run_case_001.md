@@ -1,7 +1,7 @@
 # Multi-Agent Run Transcript — CASE-001
 
 **Criteria:** AC-02 (supervisor + workers) · AC-03 (conditional routing) · AC-04 (structured output) · AC-11 (agentic RAG) · AC-12 (reflection)  
-**Generated:** 2026-09-12T23:18:42+00:00  
+**Generated:** 2026-09-13T05:18:03+00:00  
 **Regenerate:** `python scripts/generate_evidence.py`
 
 > All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).
@@ -15,24 +15,31 @@ The supervisor plans, dispatches to specialist workers, and every artifact passe
 ## Run timeline
 
 
-### `     432ms` → node `intake`
+### `     324ms` → node `intake`
 
-`     432ms` **RISK** tier **low** (score 0.14) — diagnosis with a high 30-day readmission rate
+`     324ms` **RISK** tier **low** (score 0.14) — diagnosis with a high 30-day readmission rate
 
-`   11737ms` **TOOL** `patient_lookup` (mcp, ok)  
-    args: `{"mrn": "CASE-001"}`  
-    result: `{
-  "found": false,
-  "mrn": "CASE-001",
-  "error": "No patient found with MRN 'CASE-001'.",
-  "available_mrns": [
-    "pii_d3f221f214",
-    "mrn_dfb948706a",
-    "mrn_adada3cae0"
-  ]
-}`
+`    3711ms` **MEMORY_OP** `{"op": "recall", "tier": "multi", "count": 6, "keys": ["admission:CASE-001", "followup:CASE-001:primary care", "med_change:CASE-001:amoxicillin-clavulanate", "followup:CASE-001:radiology", "risk_tier", "caregiver"], "cross_session": false}`
 
-`   12024ms` **TOOL** `medication_interaction_check` (mcp, ok)  
+`    3711ms` ← `intake` done in 3387.4ms — `{"risk_tier": "low", "notes_quarantined": 3, "notes_flagged": 0, "memories_recalled": 6}`
+
+
+### `    3713ms` → node `supervisor`
+
+`    8346ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
+
+`    8346ms` **SUPERVISOR** dispatches to **`medication`**  
+    _Medication reconciliation is required before scheduling follow-up appointments and drafting patient education materials. Completing it first unblocks the downstream dependency chain._
+
+`    8346ms` ← `supervisor` done in 4633.8ms — `{"next_agent": "medication", "step": 1}`
+
+`    8347ms` **ROUTE** `route_from_supervisor` → **`medication`**  
+    _supervisor selected 'medication'_
+
+
+### `    8349ms` → node `medication`
+
+`   12025ms` **TOOL** `medication_interaction_check` (mcp, ok)  
     args: `{"medications": ["Lisinopril", "Amoxicillin-clavulanate"]}`  
     result: `{
   "medications_checked": [
@@ -47,12 +54,25 @@ The supervisor plans, dispatches to specialist workers, and every artifact passe
   "pharmacist_review_required": false,
   "advisory": "No major `
 
-`   13635ms` **TOOL** `patient_lookup` (mcp, ok)  
-    args: `{"mrn": "pii_d3f221f214"}`  
+`   13756ms` **TOOL** `patient_lookup` (mcp, ok)  
+    args: `{"mrn": "CASE-001"}`  
+    result: `{
+  "found": false,
+  "mrn": "CASE-001",
+  "error": "No patient found with MRN 'CASE-001'.",
+  "available_mrns": [
+    "pii_a89239eee6",
+    "mrn_9291292439",
+    "mrn_6785eaf542"
+  ]
+}`
+
+`   15092ms` **TOOL** `patient_lookup` (mcp, ok)  
+    args: `{"mrn": "pii_a89239eee6"}`  
     result: `{
   "found": true,
-  "mrn": "pii_d3f221f214",
-  "name": "pii_d398afae36",
+  "mrn": "pii_a89239eee6",
+  "name": "pii_ccecc67c4d",
   "age": 54,
   "sex": "M",
   "admission_date": "2026-08-14",
@@ -61,84 +81,45 @@ The supervisor plans, dispatches to specialist workers, and every artifact passe
   "primary_diagnosis": "Community-acquired pneumonia, right lower lobe",
   "pro`
 
-`   13888ms` **TOOL** `patient_lookup` (mcp, ok)  
-    args: `{"mrn": "mrn_dfb948706a"}`  
-    result: `{
-  "found": true,
-  "mrn": "mrn_dfb948706a",
-  "name": "Eleanor Prasad",
-  "age": 79,
-  "sex": "F",
-  "admission_date": "2026-08-20",
-  "attending": "Dr. S. Lindqvist",
-  "ward": "Cardiology 5A",
-  "primary_diagnosis": "Acute decompensated heart failure with reduced ejection fra`
+`   20722ms` **REACT_COMPLETE** `{"worker": "medication", "iterations": 4, "reason": "model_stopped_calling_tools"}`
 
-`    4959ms` **MEMORY_OP** `{"op": "recall", "tier": "multi", "count": 6, "keys": ["admission:CASE-001", "followup:CASE-001:primary care", "med_change:CASE-001:amoxicillin-clavulanate", "followup:CASE-001:radiology", "risk_tier", "caregiver"], "cross_session": false}`
+`   27970ms` **STRUCTURED_OUTPUT** `{"node": "medication", "schema": "MedicationReconciliation", "schema_valid": true, "error": ""}`
 
-`    4959ms` ← `intake` done in 4527.7ms — `{"risk_tier": "low", "notes_quarantined": 3, "notes_flagged": 0, "memories_recalled": 6}`
+`   27971ms` ← `medication` done in 19622.1ms — `{"ok": true, "worker": "medication", "schema": "MedicationReconciliation"}`
 
-
-### `    4961ms` → node `supervisor`
-
-`    4961ms` **SUPERVISOR** dispatches to **`finalize`**  
-    _all_complete_
-
-`    4961ms` ← `supervisor` done in 0.4ms — `{"next_agent": "finalize", "step": 1}`
-
-`    4962ms` **ROUTE** `route_from_supervisor` → **`finalize`**  
-    _supervisor selected 'finalize'_
-
-
-### `    4962ms` → node `finalize`
-
-`    5133ms` **MEMORY_EVICTION** `{"namespace_hash": "pii_7c624ee160", "dry_run": false, "evaluated": 6, "kept": 6, "evicted": 0, "expired_by_ttl": 0, "evicted_by_capacity": 0, "permanent_retained": 1, "evicted_keys": []}`
-
-`    5134ms` **MEMORY_OP** `{"op": "write", "tier": "multi", "count": 6, "keys": ["caregiver", "risk_tier", "admission:CASE-001", "med_change:CASE-001:amoxicillin-clavulanate", "followup:CASE-001:primary care", "followup:CASE-001:radiology"]}`
-
-`    5134ms` **PACKET_FINALIZED** `{"completeness": 1.0, "escalations": 0, "quarantine_flags": 0, "workstreams_completed": ["medication", "followup", "summary", "education"]}`
-
-`    5134ms` ← `finalize` done in 171.7ms — `{"completeness": 1.0}`
-
-`   19395ms` **REACT_COMPLETE** `{"worker": "medication", "iterations": 3, "reason": "model_stopped_calling_tools"}`
-
-`   24064ms` **STRUCTURED_OUTPUT** `{"node": "medication", "schema": "MedicationReconciliation", "schema_valid": true, "error": ""}`
-
-`   24064ms` ← `medication` done in 16465.1ms — `{"ok": true, "worker": "medication", "schema": "MedicationReconciliation"}`
-
-`   24065ms` **ROUTE** `route_after_medication` → **`reflect`**  
+`   27971ms` **ROUTE** `route_after_medication` → **`reflect`**  
     _highest interaction severity=none; pharmacist_required=False_
 
 
-### `   24068ms` → node `reflect`
+### `   27972ms` → node `reflect`
 
-`   27710ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
+`   32442ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
 
-`   27711ms` **CRITIC** `medication` confidence **0.95** → **ACCEPT**
+`   32443ms` **CRITIC** `medication` confidence **0.95** → **ACCEPT**
 
-`   27711ms` ← `reflect` done in 3643.2ms — `{"action": "accept", "confidence": 0.95}`
+`   32443ms` ← `reflect` done in 4470.8ms — `{"action": "accept", "confidence": 0.95}`
 
-`   27711ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
+`   32444ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
     _critic accepted or escalated; returning to supervisor_
 
 
-### `   27712ms` → node `supervisor`
+### `   32444ms` → node `supervisor`
 
-`   32638ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
+`   36569ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
 
-`   32638ms` **SUPERVISOR** dispatches to **`followup`**  
-    _Medication reconciliation is complete, unlocking the follow-up workstream to prepare for final patient education._
+`   36570ms` **SUPERVISOR** dispatches to **`followup`**  
+    _Medication reconciliation is complete, which unblocks follow-up scheduling. Completing follow-up planning now will fulfill the prerequisites for patient education._
 
-`   32638ms` ← `supervisor` done in 4926.0ms — `{"next_agent": "followup", "step": 2}`
+`   36570ms` ← `supervisor` done in 4125.5ms — `{"next_agent": "followup", "step": 2}`
 
-`   32639ms` **ROUTE** `route_from_supervisor` → **`followup`**  
+`   36570ms` **ROUTE** `route_from_supervisor` → **`followup`**  
     _supervisor selected 'followup'_
 
 
-### `   32640ms` → node `followup`
+### `   36571ms` → node `followup`
 
-`   36404ms` **TOOL** `schedule_followup` (mcp, ok)  
-    args: `{"discharge_date": "2026-08-17", "reason": "Clinical re-evaluation post-discharge for right lower lobe community-acquired pneumonia and oral antibiotic step-down monitoring.", "within_days": 14, "spec`  
+`   39721ms` **TOOL** `schedule_followup` (mcp, ok)  
+    args: `{"within_days": 14, "discharge_date": "2026-08-17", "specialty": "Primary Care", "reason": "Clinical re-evaluation post-discharge for right lower lobe community-acquired pneumonia and oral antibiotic `  
     result: `{
   "confirmed": true,
   "confirmation_id": "FU-CASE-001-PRI-0831",
@@ -150,7 +131,58 @@ The supervisor plans, dispatches to specialist workers, and every artifact passe
   "within_requested_window": true,
   "reason": "Clinical re-evalua`
 
-`   36628ms` **TOOL** `schedule_followup` (mcp, ok)  
+`   41242ms` **TOOL** `schedule_followup` (mcp, ok)  
+    args: `{"discharge_date": "2026-08-17", "specialty": "Radiology", "within_days": 42, "mrn": "CASE-001", "reason": "Follow-up chest radiograph at 6 weeks to confirm radiographic resolution of right lower lobe`  
+    result: `{
+  "confirmed": true,
+  "confirmation_id": "FU-CASE-001-RAD-0907",
+  "mrn": "CASE-001",
+  "specialty": "Radiology",
+  "scheduled_date": "2026-09-07",
+  "days_from_discharge": 21,
+  "requested_within_days": 42,
+  "within_requested_window": true,
+  "reason": "Follow-up chest radio`
+
+`   45543ms` **REACT_COMPLETE** `{"worker": "followup", "iterations": 3, "reason": "model_stopped_calling_tools"}`
+
+`   49932ms` **STRUCTURED_OUTPUT** `{"node": "followup", "schema": "FollowUpPlan", "schema_valid": true, "error": ""}`
+
+`   49933ms` ← `followup` done in 13361.9ms — `{"ok": true, "worker": "followup", "schema": "FollowUpPlan"}`
+
+`   49934ms` **ROUTE** `route_risk_tier` → **`reflect`**  
+    _readmission risk tier=low (score 0.14)_
+
+
+### `   49935ms` → node `reflect`
+
+`   59821ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
+
+`   59822ms` **CRITIC** `followup` confidence **0.65** → **REVISE**
+    - Radiology appointment scheduled_date (2026-09-07) is 21 days post-discharge, which contradicts the stated 6-week / 42-day follow-up timeframe (2026-09-28).
+
+`   59822ms` ← `reflect` done in 9887.1ms — `{"action": "revise", "confidence": 0.65}`
+
+`   59823ms` **ROUTE** `route_after_reflection` → **`followup`**  
+    _critic requested revision of 'followup': 1 issue(s)_
+
+
+### `   59824ms` → node `followup`
+
+`   64145ms` **TOOL** `schedule_followup` (mcp, ok)  
+    args: `{"specialty": "Primary Care", "discharge_date": "2026-08-17", "within_days": 14, "mrn": "CASE-001", "reason": "Clinical re-evaluation post-discharge for right lower lobe community-acquired pneumonia a`  
+    result: `{
+  "confirmed": true,
+  "confirmation_id": "FU-CASE-001-PRI-0831",
+  "mrn": "CASE-001",
+  "specialty": "Primary Care",
+  "scheduled_date": "2026-08-31",
+  "days_from_discharge": 14,
+  "requested_within_days": 14,
+  "within_requested_window": true,
+  "reason": "Clinical re-evalua`
+
+`   64339ms` **TOOL** `schedule_followup` (mcp, ok)  
     args: `{"within_days": 42, "specialty": "Radiology", "discharge_date": "2026-08-17", "mrn": "CASE-001", "reason": "Follow-up chest radiograph at 6 weeks to confirm radiographic resolution of right lower lobe`  
     result: `{
   "confirmed": true,
@@ -163,221 +195,123 @@ The supervisor plans, dispatches to specialist workers, and every artifact passe
   "within_requested_window": true,
   "reason": "Follow-up chest radio`
 
-`   39759ms` **REACT_COMPLETE** `{"worker": "followup", "iterations": 2, "reason": "model_stopped_calling_tools"}`
+`   72919ms` **REACT_COMPLETE** `{"worker": "followup", "iterations": 2, "reason": "model_stopped_calling_tools"}`
 
-`   44574ms` **STRUCTURED_OUTPUT** `{"node": "followup", "schema": "FollowUpPlan", "schema_valid": true, "error": ""}`
+`   82118ms` **STRUCTURED_OUTPUT** `{"node": "followup", "schema": "FollowUpPlan", "schema_valid": true, "error": ""}`
 
-`   44574ms` ← `followup` done in 11934.5ms — `{"ok": true, "worker": "followup", "schema": "FollowUpPlan"}`
+`   82119ms` ← `followup` done in 22295.0ms — `{"ok": true, "worker": "followup", "schema": "FollowUpPlan"}`
 
-`   44575ms` **ROUTE** `route_risk_tier` → **`reflect`**  
+`   82119ms` **ROUTE** `route_risk_tier` → **`reflect`**  
     _readmission risk tier=low (score 0.14)_
 
 
-### `   44576ms` → node `reflect`
+### `   82120ms` → node `reflect`
 
-`   52037ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
+`   86108ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
 
-`   52037ms` **CRITIC** `followup` confidence **0.65** → **REVISE**
-    - The scheduled date for the follow-up chest radiograph is listed as 2026-09-07 (3 weeks post-discharge), which contradicts 'within_days: 42' and the 6-week timeframe (2026-09-28) recommended in the clinical notes.
+`   86109ms` **CRITIC** `followup` confidence **0.95** → **ACCEPT**
 
-`   52037ms` ← `reflect` done in 7461.5ms — `{"action": "revise", "confidence": 0.65}`
+`   86109ms` ← `reflect` done in 3988.6ms — `{"action": "accept", "confidence": 0.95}`
 
-`   52038ms` **ROUTE** `route_after_reflection` → **`followup`**  
-    _critic requested revision of 'followup': 1 issue(s)_
-
-
-### `   52039ms` → node `followup`
-
-`   58959ms` **TOOL** `schedule_followup` (mcp, ok)  
-    args: `{"mrn": "CASE-001", "within_days": 14, "specialty": "Primary Care", "discharge_date": "2026-08-17", "reason": "Clinical re-evaluation post-discharge for right lower lobe community-acquired pneumonia a`  
-    result: `{
-  "confirmed": true,
-  "confirmation_id": "FU-CASE-001-PRI-0831",
-  "mrn": "CASE-001",
-  "specialty": "Primary Care",
-  "scheduled_date": "2026-08-31",
-  "days_from_discharge": 14,
-  "requested_within_days": 14,
-  "within_requested_window": true,
-  "reason": "Clinical re-evalua`
-
-`   59202ms` **TOOL** `schedule_followup` (mcp, ok)  
-    args: `{"within_days": 42, "reason": "Follow-up chest radiograph at 6 weeks to confirm radiographic resolution of right lower lobe consolidation.", "mrn": "CASE-001", "discharge_date": "2026-08-17", "special`  
-    result: `{
-  "confirmed": true,
-  "confirmation_id": "FU-CASE-001-RAD-0907",
-  "mrn": "CASE-001",
-  "specialty": "Radiology",
-  "scheduled_date": "2026-09-07",
-  "days_from_discharge": 21,
-  "requested_within_days": 42,
-  "within_requested_window": true,
-  "reason": "Follow-up chest radio`
-
-`   62045ms` **AGENTIC RAG** the agent chose to look up:  
-    _"community acquired pneumonia follow up chest radiograph timing 6 weeks"_ → ['pneumonia_discharge_protocol.md', 'pneumonia_discharge_protocol.md', 'pneumonia_discharge_protocol.md']
-
-`   62045ms` **TOOL** `search_clinical_guidance` (local, ok)  
-    args: `{"query": "community acquired pneumonia follow up chest radiograph timing 6 weeks", "k": 3}`  
-    result: `['Follow-up intervals', 'Community-Acquired Pneumonia Discharge Protocol', 'Pre-discharge requirements']`
-
-`   69130ms` **REACT_COMPLETE** `{"worker": "followup", "iterations": 3, "reason": "model_stopped_calling_tools"}`
-
-`   75514ms` **STRUCTURED_OUTPUT** `{"node": "followup", "schema": "FollowUpPlan", "schema_valid": true, "error": ""}`
-
-`   75515ms` ← `followup` done in 23476.7ms — `{"ok": true, "worker": "followup", "schema": "FollowUpPlan"}`
-
-`   75519ms` **ROUTE** `route_risk_tier` → **`reflect`**  
-    _readmission risk tier=low (score 0.14)_
-
-
-### `   75520ms` → node `reflect`
-
-`   79160ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
-
-`   79160ms` **CRITIC** `followup` confidence **0.95** → **ACCEPT**
-
-`   79160ms` ← `reflect` done in 3640.6ms — `{"action": "accept", "confidence": 0.95}`
-
-`   79161ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
+`   86109ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
     _critic accepted or escalated; returning to supervisor_
 
 
-### `   79162ms` → node `supervisor`
+### `   86110ms` → node `supervisor`
 
-`   82547ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
+`   91666ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
 
-`   82547ms` **SUPERVISOR** dispatches to **`summary`**  
+`   91666ms` **SUPERVISOR** dispatches to **`summary`**  
     _Deterministic dependency order applied (model unavailable or unusable)._
 
-`   82548ms` ← `supervisor` done in 3385.9ms — `{"next_agent": "summary", "step": 3}`
+`   91667ms` ← `supervisor` done in 5556.1ms — `{"next_agent": "summary", "step": 3}`
 
-`   82548ms` **ROUTE** `route_from_supervisor` → **`summary`**  
+`   91667ms` **ROUTE** `route_from_supervisor` → **`summary`**  
     _supervisor selected 'summary'_
 
 
-### `   82550ms` → node `summary`
+### `   91668ms` → node `summary`
 
-`   87200ms` **TOOL** `patient_lookup` (mcp, ok)  
-    args: `{"mrn": "CASE-001"}`  
-    result: `{
-  "found": false,
-  "mrn": "CASE-001",
-  "error": "No patient found with MRN 'CASE-001'.",
-  "available_mrns": [
-    "pii_d3f221f214",
-    "mrn_dfb948706a",
-    "mrn_adada3cae0"
-  ]
-}`
+`  102253ms` **REACT_COMPLETE** `{"worker": "summary", "iterations": 1, "reason": "model_stopped_calling_tools"}`
 
-`   88676ms` **TOOL** `patient_lookup` (mcp, ok)  
-    args: `{"mrn": "mrn_dfb948706a"}`  
-    result: `{
-  "found": true,
-  "mrn": "mrn_dfb948706a",
-  "name": "Eleanor Prasad",
-  "age": 79,
-  "sex": "F",
-  "admission_date": "2026-08-20",
-  "attending": "Dr. S. Lindqvist",
-  "ward": "Cardiology 5A",
-  "primary_diagnosis": "Acute decompensated heart failure with reduced ejection fra`
+`  104870ms` **STRUCTURED_OUTPUT** `{"node": "summary", "schema": "DischargeSummary", "schema_valid": true, "error": ""}`
 
-`   89917ms` **TOOL** `patient_lookup` (mcp, ok)  
-    args: `{"mrn": "pii_d3f221f214"}`  
-    result: `{
-  "found": true,
-  "mrn": "pii_d3f221f214",
-  "name": "pii_d398afae36",
-  "age": 54,
-  "sex": "M",
-  "admission_date": "2026-08-14",
-  "attending": "Dr. R. Okonkwo",
-  "ward": "General Medicine 3B",
-  "primary_diagnosis": "Community-acquired pneumonia, right lower lobe",
-  "pro`
-
-`   98117ms` **REACT_COMPLETE** `{"worker": "summary", "iterations": 4, "reason": "model_stopped_calling_tools"}`
-
-`  106375ms` **STRUCTURED_OUTPUT** `{"node": "summary", "schema": "DischargeSummary", "schema_valid": true, "error": ""}`
-
-`  106376ms` ← `summary` done in 23826.0ms — `{"ok": true, "worker": "summary", "schema": "DischargeSummary"}`
+`  104871ms` ← `summary` done in 13202.9ms — `{"ok": true, "worker": "summary", "schema": "DischargeSummary"}`
 
 
-### `  106377ms` → node `reflect`
+### `  104872ms` → node `reflect`
 
-`  110820ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
+`  112143ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
 
-`  110821ms` **CRITIC** `summary` confidence **0.95** → **ACCEPT**
+`  112143ms` **CRITIC** `summary` confidence **0.95** → **ACCEPT**
 
-`  110821ms` ← `reflect` done in 4444.4ms — `{"action": "accept", "confidence": 0.95}`
+`  112144ms` ← `reflect` done in 7271.6ms — `{"action": "accept", "confidence": 0.95}`
 
-`  110822ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
+`  112144ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
     _critic accepted or escalated; returning to supervisor_
 
 
-### `  110823ms` → node `supervisor`
+### `  112146ms` → node `supervisor`
 
-`  113793ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
+`  116955ms` **STRUCTURED_OUTPUT** `{"node": "supervisor", "schema": "SupervisorPlan", "schema_valid": true, "error": ""}`
 
-`  113794ms` **SUPERVISOR** dispatches to **`education`**  
+`  116956ms` **SUPERVISOR** dispatches to **`education`**  
     _Deterministic dependency order applied (model unavailable or unusable)._
 
-`  113794ms` ← `supervisor` done in 2971.7ms — `{"next_agent": "education", "step": 4}`
+`  116956ms` ← `supervisor` done in 4810.3ms — `{"next_agent": "education", "step": 4}`
 
-`  113795ms` **ROUTE** `route_from_supervisor` → **`education`**  
+`  116956ms` **ROUTE** `route_from_supervisor` → **`education`**  
     _supervisor selected 'education'_
 
 
-### `  113796ms` → node `education`
+### `  116957ms` → node `education`
 
-`  116056ms` **AGENTIC RAG** the agent chose to look up:  
-    _"pneumonia patient education red flags discharge guidance"_ → ['pneumonia_discharge_protocol.md', 'pneumonia_discharge_protocol.md', 'pneumonia_discharge_protocol.md']
+`  119899ms` **AGENTIC RAG** the agent chose to look up:  
+    _"patient education packet pneumonia discharge red flag symptoms follow up"_ → ['pneumonia_discharge_protocol.md', 'pneumonia_discharge_protocol.md', 'pneumonia_discharge_protocol.md']
 
-`  116057ms` **TOOL** `search_clinical_guidance` (local, ok)  
-    args: `{"query": "pneumonia patient education red flags discharge guidance", "k": 3}`  
-    result: `['Pre-discharge requirements', 'Community-Acquired Pneumonia Discharge Protocol', 'Follow-up intervals']`
+`  119899ms` **TOOL** `search_clinical_guidance` (local, ok)  
+    args: `{"query": "patient education packet pneumonia discharge red flag symptoms follow up", "k": 3}`  
+    result: `['Red-flag symptoms', 'Community-Acquired Pneumonia Discharge Protocol', 'Follow-up intervals']`
 
-`  122499ms` **REACT_COMPLETE** `{"worker": "education", "iterations": 2, "reason": "model_stopped_calling_tools"}`
+`  127808ms` **REACT_COMPLETE** `{"worker": "education", "iterations": 2, "reason": "model_stopped_calling_tools"}`
 
-`  127073ms` **STRUCTURED_OUTPUT** `{"node": "education", "schema": "EducationPacket", "schema_valid": true, "error": ""}`
+`  134950ms` **STRUCTURED_OUTPUT** `{"node": "education", "schema": "EducationPacket", "schema_valid": true, "error": ""}`
 
-`  127074ms` ← `education` done in 13278.1ms — `{"ok": true, "worker": "education", "schema": "EducationPacket"}`
+`  134950ms` ← `education` done in 17993.0ms — `{"ok": true, "worker": "education", "schema": "EducationPacket"}`
 
 
-### `  127075ms` → node `reflect`
+### `  134951ms` → node `reflect`
 
-`  133139ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
+`  141686ms` **STRUCTURED_OUTPUT** `{"node": "reflect", "schema": "Reflection", "schema_valid": true, "error": ""}`
 
-`  133140ms` **CRITIC** `education` confidence **0.95** → **ACCEPT**
+`  141686ms` **CRITIC** `education` confidence **0.95** → **ACCEPT**
 
-`  133140ms` ← `reflect` done in 6065.1ms — `{"action": "accept", "confidence": 0.95}`
+`  141686ms` ← `reflect` done in 6735.0ms — `{"action": "accept", "confidence": 0.95}`
 
-`  133141ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
+`  141687ms` **ROUTE** `route_after_reflection` → **`supervisor`**  
     _critic accepted or escalated; returning to supervisor_
 
 
-### `  133142ms` → node `supervisor`
+### `  141688ms` → node `supervisor`
 
-`  133142ms` **SUPERVISOR** dispatches to **`finalize`**  
+`  141688ms` **SUPERVISOR** dispatches to **`finalize`**  
     _all_complete_
 
-`  133143ms` ← `supervisor` done in 1.0ms — `{"next_agent": "finalize", "step": 5}`
+`  141689ms` ← `supervisor` done in 0.8ms — `{"next_agent": "finalize", "step": 5}`
 
-`  133143ms` **ROUTE** `route_from_supervisor` → **`finalize`**  
+`  141689ms` **ROUTE** `route_from_supervisor` → **`finalize`**  
     _supervisor selected 'finalize'_
 
 
-### `  133144ms` → node `finalize`
+### `  141690ms` → node `finalize`
 
-`  133277ms` **MEMORY_EVICTION** `{"namespace_hash": "pii_d3f221f214", "dry_run": false, "evaluated": 6, "kept": 6, "evicted": 0, "expired_by_ttl": 0, "evicted_by_capacity": 0, "permanent_retained": 1, "evicted_keys": []}`
+`  141880ms` **MEMORY_EVICTION** `{"namespace_hash": "pii_a89239eee6", "dry_run": false, "evaluated": 6, "kept": 6, "evicted": 0, "expired_by_ttl": 0, "evicted_by_capacity": 0, "permanent_retained": 1, "evicted_keys": []}`
 
-`  133277ms` **MEMORY_OP** `{"op": "write", "tier": "multi", "count": 6, "keys": ["caregiver", "risk_tier", "admission:CASE-001", "med_change:CASE-001:amoxicillin-clavulanate", "followup:CASE-001:primary care", "followup:CASE-001:radiology"]}`
+`  141881ms` **MEMORY_OP** `{"op": "write", "tier": "multi", "count": 6, "keys": ["caregiver", "risk_tier", "admission:CASE-001", "med_change:CASE-001:amoxicillin-clavulanate", "followup:CASE-001:primary care", "followup:CASE-001:radiology"]}`
 
-`  133277ms` **PACKET_FINALIZED** `{"completeness": 1.0, "escalations": 0, "quarantine_flags": 0, "workstreams_completed": ["medication", "followup", "summary", "education"]}`
+`  141881ms` **PACKET_FINALIZED** `{"completeness": 1.0, "escalations": 0, "quarantine_flags": 0, "workstreams_completed": ["medication", "followup", "summary", "education"]}`
 
-`  133278ms` ← `finalize` done in 133.2ms — `{"completeness": 1.0}`
+`  141881ms` ← `finalize` done in 191.1ms — `{"completeness": 1.0}`
 
 
 ---
@@ -386,26 +320,27 @@ The supervisor plans, dispatches to specialist workers, and every artifact passe
 
 | event | count |
 |---|---|
-| `token_usage` | 27 |
-| `node_exit` | 18 |
+| `token_usage` | 26 |
 | `node_enter` | 17 |
-| `tool_call` | 13 |
+| `node_exit` | 17 |
+| `structured_output` | 14 |
 | `routing_decision` | 13 |
-| `structured_output` | 13 |
+| `tool_call` | 8 |
 | `supervisor_decision` | 5 |
+| `worker_context` | 5 |
 | `react_complete` | 5 |
 | `worker_output` | 5 |
 | `reflection` | 5 |
-| `worker_context` | 4 |
-| `memory_op` | 3 |
-| `memory_eviction` | 2 |
-| `packet_finalized` | 2 |
-| `run_complete` | 2 |
-| `rag_query` | 2 |
+| `memory_op` | 2 |
 | `supervisor_override` | 2 |
 | `mcp_connected` | 1 |
 | `toolbox_ready` | 1 |
+| `checkpoint_cleared` | 1 |
 | `run_start` | 1 |
 | `risk_assessment` | 1 |
+| `rag_query` | 1 |
+| `memory_eviction` | 1 |
+| `packet_finalized` | 1 |
+| `run_complete` | 1 |
 
 Raw trace: [`case_001.jsonl`](../traces/case_001.jsonl)

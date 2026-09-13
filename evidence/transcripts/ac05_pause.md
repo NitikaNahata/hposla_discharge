@@ -1,7 +1,7 @@
 # AC-05 — Process 1: Pause at the Interrupt
 
 **Criteria:** AC-05 (deterministically scored)  
-**Generated:** 2026-09-12T23:18:42+00:00  
+**Generated:** 2026-09-13T05:18:03+00:00  
 **Regenerate:** `python scripts/generate_evidence.py`
 
 > All data is synthetic. Identifiers are pseudonymised in traces (NFR-05).
