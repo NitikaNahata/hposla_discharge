@@ -107,8 +107,11 @@ class Tracer:
         self.usage = TokenUsage()
         self.model = cfg.model
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        # Truncate: a trace file describes exactly one run.
-        self.path.write_text("", encoding="utf-8")
+        # Truncation is deferred to the first emit() (below), not done here: a Tracer is
+        # sometimes constructed just to build a graph/toolbox for a checkpoint status
+        # check, and a run that turns out to need no new work must never destroy the
+        # existing trace from whichever run actually did the work.
+        self._file_initialized = False
 
     # -- PII registration ---------------------------------------------------
 
@@ -122,6 +125,10 @@ class Tracer:
 
     def emit(self, event: str, **fields: Any) -> dict[str, Any]:
         """Append one structured event to the trace."""
+        if not self._file_initialized:
+            # Truncate on the first real write: a trace file describes exactly one run.
+            self.path.write_text("", encoding="utf-8")
+            self._file_initialized = True
         self._seq += 1
         record: dict[str, Any] = {
             "seq": self._seq,
