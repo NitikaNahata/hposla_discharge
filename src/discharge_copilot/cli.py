@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any
 
 import typer
+from langchain_core.runnables import RunnableConfig
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -52,7 +53,7 @@ def load_case(path: Path) -> DischargeCase:
     return DischargeCase.model_validate(raw)
 
 
-def _thread_config(case_id: str) -> dict[str, Any]:
+def _thread_config(case_id: str) -> RunnableConfig:
     """LangGraph thread configuration. `thread_id` is what makes resume possible (AC-05)."""
     return {"configurable": {"thread_id": case_id}, "recursion_limit": 60}
 
@@ -195,6 +196,27 @@ def run(
     cfg = get_config()
     cfg.ensure_dirs()
     discharge_case = load_case(case)
+
+    if not fresh:
+        early_checkpointer = make_checkpointer()
+        existing = early_checkpointer.get_tuple(_thread_config(discharge_case.case_id))
+        if existing is not None:
+            values = existing.checkpoint.get("channel_values", {})
+            if values.get("status") in ("complete", "partial") and not existing.pending_writes:
+                # Already finished in a prior run: invoking the graph again would just
+                # short-circuit to the same result without executing a single node. This
+                # check has to happen before ANY Tracer is constructed and before the MCP
+                # toolbox is built — build_toolbox() emits a trace event as a side effect
+                # of connecting, which would truncate the trace file from whichever run
+                # actually did the work. Reading the checkpoint directly avoids all of
+                # that: no tracer, no toolbox, no graph.
+                console.print(
+                    f"[dim]{discharge_case.case_id} already completed in a previous run "
+                    f"— reusing checkpoint. Use --fresh to re-run from scratch.[/dim]"
+                )
+                _save_packet_json(discharge_case.case_id, values.get("packet", {}))
+                _print_packet(values.get("packet", {}))
+                return
 
     trace_id = new_trace_id(discharge_case.case_id, trace_suffix)
     tracer = Tracer(trace_id, case_id=discharge_case.case_id, echo=not quiet)
