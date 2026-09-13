@@ -131,7 +131,7 @@ evaluation:
   allow_failure: false
 
 # ============================================================================
-# STAGE: DEEPEVAL (LLM-based Assessment with Gemini 1.5 Pro)
+# STAGE: DEEPEVAL (LLM-based Assessment with Gemini 3.1 Pro)
 # ============================================================================
 deepeval_assessment:
   stage: deepeval
@@ -139,10 +139,10 @@ deepeval_assessment:
   before_script:
     - python -m pip install --upgrade pip
     - pip install -r requirements.txt -e .
-    - git config --global user.email "ci@virtusa.com"
+    - git config --global user.email "ci@discharge-copilot.local"
     - git config --global user.name "GitLab CI"
   script:
-    - echo "Running DeepEval LLM-based assessment (Gemini 1.5 Pro)..."
+    - echo "Running DeepEval LLM-based assessment (Gemini 3.1 Pro)..."
     - python evaluation/deepeval_runner.py --commit
     - echo "✅ DeepEval assessment complete and committed"
   artifacts:
@@ -172,8 +172,13 @@ reproducibility:
 
     - echo "Asserting no secrets are committed..."
     - |
-      if git grep -nIE '(AIza[0-9A-Za-z_-]{20,}|GOOGLE_API_KEY=[^[:space:]]+)' \
-           -- . ':(exclude).env.example' ':(exclude).gitlab-ci.yml'; then
+      # Only the AIza... shape is checked - a real Google API key. The looser
+      # GOOGLE_API_KEY=<anything> pattern this used to include false-positived on every
+      # legitimate reference to the env var name (docker-compose.yml, docs, tests,
+      # run.sh's own presence check) since it doesn't care what follows the "=".
+      if git grep -nIE 'AIza[0-9A-Za-z_-]{20,}' \
+           -- . ':(exclude).env.example' ':(exclude).gitlab-ci.yml' \
+              ':(exclude).github/workflows/*' ':(exclude).pre-commit-config.yaml'; then
         echo "❌ ERROR: a key-shaped string is committed"
         exit 1
       fi

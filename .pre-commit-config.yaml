@@ -31,7 +31,7 @@ repos:
         name: no committed API keys (NFR-01)
         entry: >
           bash -c 'git diff --cached -U0 |
-          grep -nE "^\+.*(AIza[0-9A-Za-z_-]{20,}|GOOGLE_API_KEY=[^[:space:]]+)" &&
+          grep -nE "^\+.*AIza[0-9A-Za-z_-]{20,}" &&
           { echo "refusing: key-shaped string in staged diff"; exit 1; } || exit 0'
         language: system
         pass_filenames: false
